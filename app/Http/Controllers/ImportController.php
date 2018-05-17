@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Http\Controllers;
 
 use App\Repository\SupplierRepositoryFactory;
 use App\Classes\Supplier\SupplierData;
 use App\Classes\Loader\Loader;
 use App\Classes\Parser\Parser;
 
-class ImportController extends BaseController
+class ImportController extends Controller
 {
 
     protected $request;

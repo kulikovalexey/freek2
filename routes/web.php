@@ -34,4 +34,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 
+Route::get('/import/{supplier}', 'ImportController@import');
 
+Route::get('/brands', 'StoreController@getAllBrands');
+
+Route::get('/products', 'StoreController@importProducts');

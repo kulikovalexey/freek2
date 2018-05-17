@@ -13,8 +13,6 @@ class UserController extends Controller
 
     public function __construct()
     {
-        parent::__construct();
-        $this->uploadPath = public_path(config('image.directory'));
     }
 
     /**

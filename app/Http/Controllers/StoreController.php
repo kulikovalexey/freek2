@@ -1,21 +1,16 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Http\Controllers;
 
 use App\Classes\LightspeedhqApi\Worker;
-use App\Models\StoreProduct;
+use App\StoreProduct;
 use App\Repository\BrandRepository;
 
-class StoreController extends BaseController
+class StoreController extends Controller
 {
 
     protected $request;
     protected $response;
-
-    public function __construct($request)
-    {
-        $this->request = $request;
-    }
 
     public function importProducts()
     {

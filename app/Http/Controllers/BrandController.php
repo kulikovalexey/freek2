@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Http\Controllers;
 
 use App\Classes\LightspeedhqApi\Worker;
 use App\Repository\BrandRepository;
 
-class BrandController extends BaseController
+class BrandController extends Controller
 {
 
     protected $request;
