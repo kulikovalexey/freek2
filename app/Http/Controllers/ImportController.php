@@ -25,8 +25,6 @@ class ImportController extends Controller
 //        (new Loader())->downloadFile($supplierData); // :TODO uncomment
         $data = (new Parser())->parse($supplierData);
 
-
-
         $supplierRepository = (new SupplierRepositoryFactory())->makeSupplierRepository($supplierData);
         $supplierRepository->saveLoadingData($data, $supplierData);
     }
