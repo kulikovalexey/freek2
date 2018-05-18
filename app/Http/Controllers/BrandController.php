@@ -2,21 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Brand;
 use App\Classes\LightspeedhqApi\Worker;
 use App\Repository\BrandRepository;
 
 class BrandController extends Controller
 {
 
-    protected $request;
-    protected $response;
-
-    public function __construct($request, $response, $args)
+    public function index()
     {
-        $this->request = $request;
-        $this->response = $response;
-        $this->args = $args;
+        $brands = Brand::paginate(20);
+
+        return view('brand.index', [
+            'brands' => $brands,
+        ]);
     }
+
 
     public function downloadBrands()  //:TODO rename method (now download|save in to db|)
     {
@@ -25,16 +26,6 @@ class BrandController extends Controller
         (new BrandRepository())->saveBrands($brandsData);
 
         print_r($brandsData);
-
-
-//        $supplier = (new SupplierFactory())->makeSupplier($this->args['supplier']);
-//
-//        //(new Loader())->downloadFile($supplier); :TODO расскомменировать. тут для тестирования
-//        $data = (new Parser())->parse($supplier);
-//        $data = (new ConverterToSupplierObject($supplier))->convertDataToSupplierObject($data);
-//
-//        $supplierRepositoryFactory = new SupplierRepositoryFactory();  //:TODO refactoring
-//        $supplierRepository = $supplierRepositoryFactory->makeSupplierRepository($supplier);
     }
 
 

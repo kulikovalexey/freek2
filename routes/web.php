@@ -42,12 +42,13 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home/brands', 'BrandController@index')->name('home.brands');
 
 //import from suppliers
-Route::get('/import/{supplier}', 'ImportController@import')->name('admin.import.supplier');;
+Route::get('/import/{supplier}', 'ImportController@import');
 
 //brands from store
-Route::get('/brands', 'StoreController@getAllBrands')->name('admin.import.brands');;
+Route::get('/store/brands', 'StoreController@getAllBrands');
 
 //products from store
-Route::get('/import/products', 'StoreController@importProducts');
+Route::get('/store/products', 'StoreController@importProducts');

@@ -2,8 +2,7 @@
 
 namespace App;
 
-use \Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Capsule\Manager as DB;
+use Illuminate\Database\Eloquent\Model;
 
 class StoreProduct extends Model
 {
