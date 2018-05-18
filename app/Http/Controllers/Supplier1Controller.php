@@ -20,6 +20,16 @@ class Supplier1Controller extends Controller   //:TODO в фабрику
     }
 
 
+    public function showSupplier()
+    {
+        $info = config('suppliers.supplier1');
+
+
+        return view('supplier.info', [
+            'info' => $info,
+        ]);
+    }
+
 
 
 

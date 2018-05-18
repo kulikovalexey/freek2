@@ -20,7 +20,15 @@ class Supplier2Controller extends Controller
     }
 
 
+    public function showSupplier()
+    {
+        $info = config('suppliers.supplier2');
 
+
+        return view('supplier.info', [
+            'info' => $info,
+        ]);
+    }
 
 
 }

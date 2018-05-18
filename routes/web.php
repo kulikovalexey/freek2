@@ -48,6 +48,14 @@ Route::get('/home/supplier2', 'Supplier2Controller@index');
 Route::get('/home/supplier3', 'Supplier3Controller@index');
 Route::get('/home/supplier4', 'Supplier4Controller@index');
 
+
+Route::get('/home/show/supplier1', 'Supplier1Controller@showSupplier');
+Route::get('/home/show/supplier2', 'Supplier2Controller@showSupplier');
+Route::get('/home/show/supplier3', 'Supplier3Controller@showSupplier');
+Route::get('/home/show/supplier4', 'Supplier4Controller@showSupplier');
+
+
+
 //import from suppliers
 Route::get('/import/{supplier}', 'ImportController@import');
 
