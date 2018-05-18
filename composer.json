@@ -14,7 +14,8 @@
         "laravel/tinker": "~1.0",
         "nesbot/carbon": "^1.27",
         "parsecsv/php-parsecsv": "^1.0",
-        "unisharp/laravel-ckeditor": "^4.7"
+        "unisharp/laravel-ckeditor": "^4.7",
+        "orangehill/iseed": "dev-master"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.1",
