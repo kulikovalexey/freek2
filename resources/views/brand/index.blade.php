@@ -34,7 +34,7 @@
                         </table>
                     </div>
                 </div>
-                {{ $brand->links() }}
+                {{ $brands->links() }}
             </div>
         </div>
     </div>

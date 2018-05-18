@@ -36,7 +36,7 @@ return [
         'fileType' => 'csv',
         'delimiter'=> ';',
         'dataProducts' => [
-            'sku'         => 'sku',
+            'sku'         => 'msku',
             'articleCode' => 'sku',
             'ean'         => 'ean',
             'priceIncl'   => 'price',
