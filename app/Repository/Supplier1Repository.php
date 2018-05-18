@@ -47,6 +47,10 @@ class Supplier1Repository extends AbstractRepository
         return ($price > 250);
     }
 
+    protected function isBrandInBlacklist($brand){
+        return (! in_array(strtolower($brand), $this->supplierData->exceptBrands));
+    }
+
 
 }
 

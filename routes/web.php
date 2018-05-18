@@ -12,14 +12,7 @@
 */
 
 
-Route::get('/blog/category/{slug?}', 'BlogController@category')->name('category');
-Route::get('/blog/article/{slug?}', 'BlogController@article')->name('article');
-
 Route::group(['prefix'=>'admin', 'namespace'=>'Admin', 'middleware'=>['auth']], function(){
-    Route::get('/', 'DashboardController@dashboard')->name('admin.index');  //сюда втулить ссылки
-    Route::resource('/category', 'CategoryController', ['as'=>'admin']); // products
-    Route::resource('/brands', 'CategoryController', ['as'=>'admin']); // brands
-    Route::resource('/article', 'ArticleController', ['as'=>'admin']);  // suppliers
     Route::group(['prefix' => 'user_managment', 'namespace' => 'UserManagment'], function(){
         Route::resource('/user', 'UserController', ['as'=>'admin.user_managment']);
     });
@@ -64,3 +57,9 @@ Route::get('/store/brands', 'StoreController@getAllBrands');
 
 //products from store
 Route::get('/store/products', 'StoreController@importProducts');
+
+
+
+// for hands
+// update price
+Route::get('/home/supplier1/update', 'Supplier1Controller@updatePrice');

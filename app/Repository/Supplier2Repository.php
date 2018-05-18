@@ -31,13 +31,18 @@ class Supplier2Repository extends AbstractRepository
 //            Supplier2Product::create($item);
 //        }
 //    }
+///
+/// втянул в бащу
+/// очистил от ненужных - бренд, ноль sku+ean
+/// //
+/// сейчас нужно прогнать и поменять цену.
 
     /**
      * @return string
      */
     public function truncateTable()
     {
-        Supplier2Product::truncate();
+        return Supplier2Product::truncate();
     }
 
 
@@ -61,6 +66,8 @@ class Supplier2Repository extends AbstractRepository
 
         }
     }
+
+
 
     public function saveLoadingData($data)   //:TODO решить что принять за первичный все таки
     {

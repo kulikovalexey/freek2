@@ -30,6 +30,38 @@ class Supplier1Controller extends Controller   //:TODO в фабрику
         ]);
     }
 
+    //for hands
+
+    public function updatePrice()
+    {
+
+        \App\Supplier1Product::chunk(200, function ($products) {
+            foreach ($products as $product) {
+                $product->priceIncl = 11111;
+                $product->save();
+            }
+        });
+    }
+
+    protected function calculatePrice($price, $brand)
+    {
+        if ($this->isPriceMoreThan250($price) && $this->isBrandInBlacklist($brand)){
+
+            return floor( $price * 1.21);
+
+        } elseif ( $price * 1.21 >= 50){
+
+            return floor( $price * 1.21);
+
+        } else {
+
+            return (floor( $price * 1.21)) / 2;
+        }
+    }
+
+    private function isPriceMoreThan250($price){
+        return ($price > 250);
+    }
 
 
 
