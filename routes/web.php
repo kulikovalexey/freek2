@@ -16,13 +16,23 @@ Route::get('/blog/category/{slug?}', 'BlogController@category')->name('category'
 Route::get('/blog/article/{slug?}', 'BlogController@article')->name('article');
 
 Route::group(['prefix'=>'admin', 'namespace'=>'Admin', 'middleware'=>['auth']], function(){
-    Route::get('/', 'DashboardController@dashboard')->name('admin.index');
-    Route::resource('/category', 'CategoryController', ['as'=>'admin']);
-    Route::resource('/event', 'EventController', ['as'=>'admin']);
-    Route::resource('/article', 'ArticleController', ['as'=>'admin']);
+    Route::get('/', 'DashboardController@dashboard')->name('admin.index');  //сюда втулить ссылки
+    Route::resource('/category', 'CategoryController', ['as'=>'admin']); // products
+    Route::resource('/brands', 'CategoryController', ['as'=>'admin']); // brands
+    Route::resource('/article', 'ArticleController', ['as'=>'admin']);  // suppliers
     Route::group(['prefix' => 'user_managment', 'namespace' => 'UserManagment'], function(){
         Route::resource('/user', 'UserController', ['as'=>'admin.user_managment']);
     });
+
+    // here routs
+
+
+
+
+
+
+
+
 });
 
 Route::get('/', function () {
@@ -33,9 +43,11 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+//import from suppliers
+Route::get('/import/{supplier}', 'ImportController@import')->name('admin.import.supplier');;
 
-Route::get('/import/{supplier}', 'ImportController@import');
+//brands from store
+Route::get('/brands', 'StoreController@getAllBrands')->name('admin.import.brands');;
 
-Route::get('/brands', 'StoreController@getAllBrands');
-
-Route::get('/products', 'StoreController@importProducts');
+//products from store
+Route::get('/import/products', 'StoreController@importProducts');

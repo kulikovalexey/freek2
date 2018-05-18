@@ -55,7 +55,7 @@ class Worker implements WorkerInterface
         $brands = [];
         for ($i = 1; $i <= $pages; $i++) {
 
-            $arr = ($this->api->brands->get(null, ['page' => $i]));
+            $arr = (ShopApi::brands()->get(null, ['page' => $i]));
 
             $brands = array_merge($brands, $arr);
             unset($arr);
@@ -71,7 +71,7 @@ class Worker implements WorkerInterface
      */
     public function getNumberOfBrands()
     {
-        return $this->api->brands->count();
+        return ShopApi::brands()->count();
     }
 
 

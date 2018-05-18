@@ -19,9 +19,9 @@ class CreateSupplier4ProductsTable extends Migration
     {
         Schema::create('supplier4_products', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('sku');
+            $table->string('sku')->nullable();
             $table->string('articleCode');
-            $table->string('ean');
+            $table->string('ean')->nullable();
             $table->string('brand')->nullable();
             $table->string('name');
             $table->float('priceIncl');

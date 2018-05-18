@@ -9,14 +9,19 @@ class Supplier2Repository extends AbstractRepository
 
     public function saveLoadingData($data)   //:TODO решить что принять за первичный все таки
     {
-
-
         $this->truncateTable();
 
-        foreach ($data as &$item) {
-            if ($item['ean'] == false && $item['sku'] == false) unset($item);
-//            if (!in_array(strtolower($item['brand']), $this->brands)) unset($item);
-//            $item['priceIncl'] = $this->calculatePrice($item['priceIncl']);
+        $saveData = $data;
+        foreach ($saveData as &$item) {
+            if (! isset($item['ean']) && ! isset($item['sku'])) {
+                unset($item);
+                continue;
+            }
+            if (!in_array(strtolower($item['brand']), $this->brands)) {
+                unset($item);
+                continue;
+            }
+            $item['priceIncl'] = $this->calculatePrice($item['priceIncl']);
         }
 
         foreach ($data as $item) {

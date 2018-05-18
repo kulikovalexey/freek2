@@ -24,6 +24,9 @@ class BrandRepository
     public static function getBrandNameList()
     {
         $arr = Brand::pluck('name')->toArray();
-        return strtolower(natsort($arr));
+
+        $arr = array_map('strtolower', $arr);
+        natsort($arr);
+        return $arr;
     }
 }
