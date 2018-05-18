@@ -49,34 +49,9 @@ class UsersTableSeeder extends Seeder
             ],
         ];
 
-        for ($i = 4; $i < 20; $i++) {
-            $name = $faker->name;
-
-            $user[$i] = [
-                'id' => $i,
-                'name' => $name,
-                'slug' => str_slug($name, '-'),
-                'email' => $faker->email,
-                'password' => bcrypt('secret'),
-                'avatar' => $faker->image(),
-            ];
-        }
 
         DB::table('users')->insert(
             $user
         );
-
-//        foreach ($user as $u) {
-//            if ($u['id'] == 1) {
-//                $u = User::find($u['id']);
-//                $u->roles()->attach(1);
-//            } elseif ($u['id'] == 3) {
-//                $u = User::find($u['id']);
-//                $u->roles()->attach(2);
-//            } else {
-//                $u = User::find($u['id']);
-//                $u->roles()->attach(3);
-//            }
-//        }
     }
 }

@@ -6,6 +6,7 @@ use App\Repository\SupplierRepositoryFactory;
 use App\Classes\Supplier\SupplierData;
 use App\Classes\Loader\Loader;
 use App\Classes\Parser\Parser;
+use Illuminate\Http\Request;
 
 class ImportController extends Controller
 {
@@ -15,22 +16,24 @@ class ImportController extends Controller
     protected $suppliers;
     protected $args;
 
-    public function import($args)
+    public function import(Request $request, $supplier)
     {
         $supplierData = new SupplierData(
-            $this->getConfigSuppliers($args)
+            $this->getConfigSuppliers($supplier)
         );
 
 //        (new Loader())->downloadFile($supplierData); // :TODO uncomment
         $data = (new Parser())->parse($supplierData);
 
+
+
         $supplierRepository = (new SupplierRepositoryFactory())->makeSupplierRepository($supplierData);
         $supplierRepository->saveLoadingData($data, $supplierData);
     }
 
-    protected function getConfigSuppliers($args)
+    protected function getConfigSuppliers($supplier)
     {
-        return $GLOBALS['configSuppliers'][$args['supplier']];
+        return config("suppliers.{$supplier}");
     }
 
 
