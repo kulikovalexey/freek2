@@ -38,7 +38,6 @@ class CreateSupplier1ProductsTable extends Migration
             $table->string('name');
             $table->float('priceIncl');
             $table->integer('stockLevel')->nullable();
-            $table->timestamps();
         });
     }
 

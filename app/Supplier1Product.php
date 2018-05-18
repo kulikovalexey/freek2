@@ -11,6 +11,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Supplier1Product extends Model
 {
+    public $timestamps = false;
+
     protected $table = 'supplier1_products';
 
     protected $fillable = ['sku', 'articleCode', 'ean', 'priceIncl', 'stockLevel', 'brand', 'name', 'created_at', 'updated_at'];
