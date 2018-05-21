@@ -14,8 +14,7 @@ class Products implements \App\Classes\StoreData\ItemInterface
 
 
         $products = [];
-        for ($i = 0; $i < $pages; $i++) {
-            // тут надо сразу сохранять
+        for ($i = 1; $i < $pages; $i++) {
             $newProducts = ShopApi::products()->get(null, [
                 'page' => $i,
                 'fields' => "id,createdAt,updatedAt,visibility,data01,data02,data03,title,brand,supplier",
@@ -59,15 +58,3 @@ class Products implements \App\Classes\StoreData\ItemInterface
 
     }
 }
-
-$newStoreProduct = new StoreProduct();
-////                $newStoreProduct->_id = $productsInfo[$j]['id'];
-////                $newStoreProduct->createdAt = $productsInfo[$j]['createdAt'];
-////                $newStoreProduct->updatedAt = $productsInfo[$j]['updatedAt'];
-////                $newStoreProduct->visibility = $productsInfo[$j]['visibility'];
-////                $newStoreProduct->data01 = $productsInfo[$j]['data01'];
-////                $newStoreProduct->data02 = $productsInfo[$j]['data02'];
-////                $newStoreProduct->data03 = $productsInfo[$j]['data03'];
-////                $newStoreProduct->name = $productsInfo[$j]['title'];
-////                $newStoreProduct->brand_id = $productsInfo[$j]['brand']['resource']['id']; //
-////                $newStoreProduct->supplier_id = $productsInfo[$j]['supplier']['resource']['id'];  //

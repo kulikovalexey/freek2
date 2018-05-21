@@ -15,7 +15,7 @@ class StoreController extends Controller
     {
         // api
         $data = (new Products())->getAll();
-//        (new StoreProductRepository())->saveLoadingData($data);
+        (new StoreProductRepository())->saveLoadingData($data);
 
         // api
 //        $data = (new Variants())->getAll();
