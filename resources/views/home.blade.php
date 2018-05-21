@@ -35,7 +35,7 @@
                     <a href='lsc.php?updateSupplier=441980,0'>check Supplier Wimood</a><br>
                 </div>
                 <div class="panel-body">
-                    <a href='lsc_checkstock.php?updateSupplier=367457#null'>check Stock</a><br>
+                    <a href='/store/products'>check Stock</a><br>
                 </div>
             </div>
         </div>
