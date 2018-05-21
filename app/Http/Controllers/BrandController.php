@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Brand;
-use App\Classes\LightspeedhqApi\Worker;
+use App\Classes\StoreData\Worker;
 use App\Repository\BrandRepository;
 
 class BrandController extends Controller

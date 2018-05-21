@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Classes\LightspeedhqApi;
+namespace App\Classes\StoreData;
 
 use App\StoreProduct;
 use ShopApi;
 
-class Variants implements  \App\Classes\LightspeedhqApi\ItemInterface
+class Variants implements  \App\Classes\StoreData\ItemInterface
 {
 
     function getItem($id)

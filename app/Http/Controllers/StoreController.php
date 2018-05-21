@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Classes\LightspeedhqApi\Variants;
-use App\Classes\LightspeedhqApi\Worker;
+use App\Classes\StoreData\Variants;
+use App\Classes\StoreData\Worker;
 use App\Repository\VariantRepository;
 use App\StoreProduct;
 use App\Repository\BrandRepository;

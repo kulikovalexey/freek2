@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Classes\LightspeedhqApi;
+namespace App\Classes\StoreData;
 
 Interface ItemInterface
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Classes\LightspeedhqApi;
+namespace App\Classes\StoreData;
 
 use App\StoreProduct;
 use ShopApi;
 
-class Products implements \App\Classes\LightspeedhqApi\ItemInterface
+class Products implements \App\Classes\StoreData\ItemInterface
 {
 //    public function getAll()
 //    {

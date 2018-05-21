@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Supplier2Product;
-use App\Classes\LightspeedhqApi\Worker;
+use App\Classes\StoreData\Worker;
 use App\Repository\BrandRepository;
 
 class Supplier2Controller extends Controller
