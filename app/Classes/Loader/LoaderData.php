@@ -14,50 +14,50 @@ class LoaderData
         $this->supplier = $supplier;
     }
 
-    public function parseFile()
-    {
-        $data = file_get_contents($this->supplier->url);
-
-        $rows = explode("\n", $data);
-        unset($data);
-
-        $keys = str_getcsv($rows[0], $this->supplier->delimiter);
-
-        $s = array();
-        $counter = 0;
-
-        $header = true; // :TODO for debuging
-        $supplierFkay = 'sku';  // :TODO create
-
-        foreach ($rows as $row) {
-            if ($header) {
-                if ($counter++ == 0) continue;
-                $csv = str_getcsv($row, $this->supplier->delimiter);
-                $min = min(count($keys), count($csv));
-                $product = array_combine(array_slice($keys, 0, $min), array_slice($csv, 0, $min));
-                if (
-                    $min < count($keys) ||
-                    !array_key_exists($supplierFkay, $product) ||
-                    trim($product[$supplierFkay]) == ""
-                ) {
-                    p("CSV Error: Product missing fields", 'hidden', $product);
-                    continue;
-                } else {
-                    $s[$product[$supplierFkay]] = $product;
-                }
-            } else {
-                $product = str_getcsv($row, $this->supplier->delimiter);
-                if (count($product) < count($sup->map)) {  //:TODO check
-                    p("CSV Error: Product missing fields", 'hidden', $product);
-                    continue;
-                } else {
-                    $s[$sup->fkey] = $product;
-                }
-            }
-        }
-        unset($rows);
-        return $s;
-    }
+//    public function parseFile()
+//    {
+//        $data = file_get_contents($this->supplier->url);
+//
+//        $rows = explode("\n", $data);
+//        unset($data);
+//
+//        $keys = str_getcsv($rows[0], $this->supplier->delimiter);
+//
+//        $s = array();
+//        $counter = 0;
+//
+//        $header = true; // :TODO for debuging
+//        $supplierFkay = 'sku';  // :TODO create
+//
+//        foreach ($rows as $row) {
+//            if ($header) {
+//                if ($counter++ == 0) continue;
+//                $csv = str_getcsv($row, $this->supplier->delimiter);
+//                $min = min(count($keys), count($csv));
+//                $product = array_combine(array_slice($keys, 0, $min), array_slice($csv, 0, $min));
+//                if (
+//                    $min < count($keys) ||
+//                    !array_key_exists($supplierFkay, $product) ||
+//                    trim($product[$supplierFkay]) == ""
+//                ) {
+//                    p("CSV Error: Product missing fields", 'hidden', $product);
+//                    continue;
+//                } else {
+//                    $s[$product[$supplierFkay]] = $product;
+//                }
+//            } else {
+//                $product = str_getcsv($row, $this->supplier->delimiter);
+//                if (count($product) < count($sup->map)) {  //:TODO check
+//                    p("CSV Error: Product missing fields", 'hidden', $product);
+//                    continue;
+//                } else {
+//                    $s[$sup->fkey] = $product;
+//                }
+//            }
+//        }
+//        unset($rows);
+//        return $s;
+//    }
 
 }
 
@@ -128,5 +128,3 @@ class LoaderData
 //        closeHiddenDiv();
 //        return $s;
 //    }
-
-}

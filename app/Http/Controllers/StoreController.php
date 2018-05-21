@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Classes\LightspeedhqApi\Variants;
 use App\Classes\LightspeedhqApi\Worker;
+use App\Repository\VariantRepository;
 use App\StoreProduct;
 use App\Repository\BrandRepository;
 
@@ -20,14 +21,16 @@ class StoreController extends Controller
     public function importProducts()
     {
 
-        //$data = (new Worker())->getAllProducts();
 //        $data = (new Worker())->getAllProducts();
 
 //        $products = StoreProduct::getProducts();
 
 
         $data = (new Worker())->buildVariantsData();
-        print_r($data);
+
+        (new VariantRepository())->saveLoadingData($data);
+
+
 
     }
 

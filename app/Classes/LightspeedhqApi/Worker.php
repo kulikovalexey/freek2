@@ -23,18 +23,14 @@ class Worker
 
     function buildVariantsData()
     {
-        echo "Building Variants Mapping Data";
-        // Truncate all databases
-//        $count = $api->products->count();
-        $count = $this->products->getNumberOf();
-
-        echo "Store has $count products<br>";
-//        $count = $api->variants->count();
+        echo $this->products->getNumberOf();
         $count = $this->variants->getNumberOf();
-        echo "Store has $count variants<br>";
+
+        echo $count;
 
         $i = 0;
-        $products = array();
+        $products = [];
+
         while ($count > 0) {
             if ($i++ > 20) {
                 echo "Error: Max fetch reached. Increase fetch data";
@@ -46,11 +42,12 @@ class Worker
                 'limit' => 255
             ]);
 
-//		p("Fetching Variants", "hidden", $newVariants);
             $products = array_merge($products, $newVariants);
             $count -= 255;
+            echo $count . '<br>';
         }
-        print_r($products);
+
+        return $products;
 
     }
 
