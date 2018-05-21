@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Classes\Supplier;
+namespace App\Classes\SupplierData;
 
 class SupplierData extends AbstractSupplierData
 {

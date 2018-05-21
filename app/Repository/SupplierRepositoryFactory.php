@@ -2,10 +2,8 @@
 
 namespace App\Repository;
 
-use App\Classes\Supplier\AbstractSupplierData;
-use App\Classes\Supplier\Supplier2;
-use App\Classes\Supplier\Supplier3;
-use App\Classes\Supplier\Supplier4;
+use App\Classes\SupplierData\AbstractSupplierData;
+
 
 class SupplierRepositoryFactory
 {

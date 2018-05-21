@@ -3,7 +3,7 @@
 namespace App\Classes\Parser;
 
 
-use App\Classes\Supplier\AbstractSupplierData;
+use App\Classes\SupplierData\AbstractSupplierData;
 
 class Parser
 {

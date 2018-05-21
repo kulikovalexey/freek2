@@ -3,7 +3,7 @@
 namespace App\Repository;
 
 use App\AbstractSupplierProduct;
-use App\Classes\Supplier\AbstractSupplierData;
+use App\Classes\SupplierData\AbstractSupplierData;
 use App\Supplier2Product;
 use Illuminate\Support\Facades\DB;
 

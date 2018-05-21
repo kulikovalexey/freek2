@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Classes\Supplier\AbstractSupplierData;
+use App\Classes\SupplierData\AbstractSupplierData;
 use App\Repository\BrandRepository;
 
 abstract class AbstractRepository

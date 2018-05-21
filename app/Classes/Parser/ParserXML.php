@@ -2,8 +2,8 @@
 
 namespace App\Classes\Parser;
 
-use App\Classes\Supplier\AbstractSupplierData;
-use App\Models\Supplier4Product;
+use App\Classes\SupplierData\AbstractSupplierData;
+use App\Supplier4Product;
 
 class ParserXML implements ParserInterface
 {

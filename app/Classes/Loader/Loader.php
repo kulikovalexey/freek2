@@ -2,7 +2,7 @@
 
 namespace App\Classes\Loader;
 
-use App\Classes\Supplier\AbstractSupplierData;
+use App\Classes\SupplierData\AbstractSupplierData;
 
 /**
  * Class Loader for download suppliers files  :TODO check english
