@@ -7,10 +7,7 @@ use ShopApi;
 
 class Brands implements \App\Classes\StoreData\ItemInterface
 {
-    public function getItem($id)
-    {
 
-    }
 
     /**
      * @link https://developers.lightspeedhq.com/ecom/endpoints/brand/
@@ -30,6 +27,12 @@ class Brands implements \App\Classes\StoreData\ItemInterface
             unset($arr);
         }
         return $brands;
+    }
+
+    public function getItem($id)
+    {
+        return ShopApi::brands()->get($id);
+
     }
 
     /**

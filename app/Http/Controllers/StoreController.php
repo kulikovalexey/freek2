@@ -2,41 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes\StoreData\Products;
 use App\Classes\StoreData\Variants;
 use App\Classes\StoreData\Worker;
+use App\Repository\StoreProductRepository;
 use App\Repository\VariantRepository;
-use App\StoreProduct;
 use App\Repository\BrandRepository;
-use App\Variant;
 
 class StoreController extends Controller
 {
-    protected $request;
-    protected $response;
-
- public function __construct()
- {
-
- }
-
     public function importProducts()
     {
+        // api
+        $data = (new Products())->getAll();
+//        (new StoreProductRepository())->saveLoadingData($data);
 
-//        $data = (new Worker())->buildProductsData();
-
-//        $products = StoreProduct::getProducts();
-//
-//
-        //:TODO работает
-        $data = (new Variants())->getAll();
-
-        (new VariantRepository())->saveLoadingData($data);
-
-
+        // api
+//        $data = (new Variants())->getAll();
+//        (new VariantRepository())->saveLoadingData($data);
 
     }
-
-
 
 
     public function getAllBrands()
