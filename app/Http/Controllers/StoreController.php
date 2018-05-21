@@ -7,6 +7,7 @@ use App\Classes\LightspeedhqApi\Worker;
 use App\Repository\VariantRepository;
 use App\StoreProduct;
 use App\Repository\BrandRepository;
+use App\Variant;
 
 class StoreController extends Controller
 {
@@ -21,12 +22,13 @@ class StoreController extends Controller
     public function importProducts()
     {
 
-//        $data = (new Worker())->getAllProducts();
+//        $data = (new Worker())->buildProductsData();
 
 //        $products = StoreProduct::getProducts();
-
-
-        $data = (new Worker())->buildVariantsData();
+//
+//
+        //:TODO работает
+        $data = (new Variants())->getAll();
 
         (new VariantRepository())->saveLoadingData($data);
 
