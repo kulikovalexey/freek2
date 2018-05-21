@@ -46,4 +46,7 @@ class Loader
         );
     }
 
+    //:TODO еще одна попытка
+//    public function
+
 }
