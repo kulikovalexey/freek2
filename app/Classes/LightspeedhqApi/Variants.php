@@ -6,18 +6,39 @@ use App\Classes\LightspeedhqApi\Products;
 use App\StoreProduct;
 use ShopApi;
 
-class Variants
+class Variants implements \ItemInterface
 {
+
+    function getItem($id)
+    {
+        // TODO: Implement getItem() method.
+    }
+
+    public function getAll()
+    {
+        // TODO: Implement getAll() method.
+    }
+
+    public static function getNumberOf()
+    {
+        // TODO: Implement getNumberOf() method.
+    }
+
+    public function create()
+    {
+        // TODO: Implement create() method.
+    }
+
     function getVariantsData()
     {
         echo "Building Variants Mapping Data";
         // Truncate all databases
 //        $count = $api->products->count();
-        $count = Products::getNumberOfProducts();
+        $count = Products::getNumberOf();
 
         echo "Store has $count products<br>";
 //        $count = $api->variants->count();
-        $count = self::getNumberOfVariants();
+        $count = self::getNumberOf();
         echo "Store has $count variants<br>";
 
         $i = 0;
@@ -41,8 +62,4 @@ class Variants
 
     }
 
-    public static function getNumberOfVariants()
-    {
-        return ShopApi::variants()->count();
-    }
 }

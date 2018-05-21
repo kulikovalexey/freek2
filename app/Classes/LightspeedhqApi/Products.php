@@ -5,9 +5,9 @@ namespace App\Classes\LightspeedhqApi;
 use App\StoreProduct;
 use ShopApi;
 
-class Products
+class Products implements \ItemInterface
 {
-    public function getAllProducts()
+    public function getAll()
     {
         $numberOfProducts = $this->getNumberOfProducts();
         $pages = ceil($numberOfProducts / 50);  // 95.94 50 штук на страницу 0-49  //:TODO оставить
@@ -47,7 +47,7 @@ class Products
      * @link https://developers.lightspeedhq.com/ecom/endpoints/brand/
      * @return int
      */
-    public static function getNumberOfProducts()
+    public static function getNumberOf()
     {
         return ShopApi::products()->count();
     }
@@ -57,7 +57,7 @@ class Products
      * @param $productId
      * @return mixed
      */
-    public function getProduct($productId)
+    public function getItem($productId)
     {
         return ShopApi::products()->get($productId);
 
@@ -66,7 +66,7 @@ class Products
     /**
      * @link https://developers.lightspeedhq.com/ecom/endpoints/product/
      */
-    public function createProduct()
+    public function create()
     {
 
     }

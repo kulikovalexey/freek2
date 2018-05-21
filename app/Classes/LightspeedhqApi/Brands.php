@@ -5,16 +5,21 @@ namespace App\Classes\LightspeedhqApi;
 use App\StoreProduct;
 use ShopApi;
 
-class Brands
+class Brands implements \ItemInterface
 {
+    public function getItem($id)
+    {
+
+    }
+
     /**
      * @link https://developers.lightspeedhq.com/ecom/endpoints/brand/
      *
      * @return mixed
      */
-    public function getAllBrands() //:TODO переделать
+    public function getAll() //:TODO переделать
     {
-        $cnt = $this->getNumberOfBrands();
+        $cnt = $this->getNumberOf();
         $pages = ceil($cnt / 50);
         $brands = [];
         for ($i = 1; $i <= $pages; $i++) {
@@ -33,7 +38,7 @@ class Brands
      * @link https://developers.lightspeedhq.com/ecom/endpoints/brand/
      * @return int
      */
-    public static function getNumberOfBrands()
+    public static function getNumberOf()
     {
         return ShopApi::brands()->count();
     }
@@ -41,7 +46,15 @@ class Brands
     /**
      * @link https://developers.lightspeedhq.com/ecom/endpoints/brand/
      */
-    public function createBrand()
+    public function create()
+    {
+
+    }
+
+    /**
+     * @link https://developers.lightspeedhq.com/ecom/endpoints/brand/
+     */
+    public function update()
     {
 
     }
