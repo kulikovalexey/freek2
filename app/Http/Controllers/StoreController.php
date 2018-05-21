@@ -13,13 +13,13 @@ class StoreController extends Controller
 {
     public function importProducts()
     {
-        // api
-        $data = (new Products())->getAll();
-        (new StoreProductRepository())->saveLoadingData($data);
+//        // api
+//        $data = (new Products())->getAll();
+//        (new StoreProductRepository())->saveLoadingData($data);
 
         // api
-//        $data = (new Variants())->getAll();
-//        (new VariantRepository())->saveLoadingData($data);
+        $data = (new Variants())->getAll();
+        (new VariantRepository())->saveLoadingData($data);
 
     }
 

@@ -10,7 +10,6 @@ class CreateTableStoreVariant extends Migration
     {
         Schema::create('variants', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('_id');
             $table->string('articleCode')->nullable();
             $table->string('ean')->nullable();
             $table->string('sku')->nullable();  //:TODO ключ?

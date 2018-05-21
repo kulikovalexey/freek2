@@ -21,7 +21,7 @@ class Variants implements  \App\Classes\StoreData\ItemInterface
         $products = [];
 
         while ($count > 0) {
-            if ($i++ > 20) {  //:TODO refactoring
+            if ($i++ > 20) {
                 echo "Error: Max fetch reached. Increase fetch data";
                 break;
             }
@@ -33,7 +33,6 @@ class Variants implements  \App\Classes\StoreData\ItemInterface
 
             $products = array_merge($products, $newVariants);
             $count -= 255;
-            echo $count . '<br>';
         }
 
         return $products;
