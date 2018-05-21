@@ -2,11 +2,10 @@
 
 namespace App\Classes\LightspeedhqApi;
 
-use App\Classes\LightspeedhqApi\Products;
 use App\StoreProduct;
 use ShopApi;
 
-class Variants implements \ItemInterface
+class Variants implements  \App\Classes\LightspeedhqApi\ItemInterface
 {
 
     function getItem($id)

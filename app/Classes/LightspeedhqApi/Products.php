@@ -5,11 +5,11 @@ namespace App\Classes\LightspeedhqApi;
 use App\StoreProduct;
 use ShopApi;
 
-class Products implements \ItemInterface
+class Products implements \App\Classes\LightspeedhqApi\ItemInterface
 {
     public function getAll()
     {
-        $numberOfProducts = $this->getNumberOfProducts();
+        $numberOfProducts = $this->getNumberOf();
         $pages = ceil($numberOfProducts / 50);  // 95.94 50 штук на страницу 0-49  //:TODO оставить
 
         for ($i = 0; $i < $pages; $i++) {

@@ -5,7 +5,7 @@ namespace App\Classes\LightspeedhqApi;
 use App\StoreProduct;
 use ShopApi;
 
-class Brands implements \ItemInterface
+class Brands implements \App\Classes\LightspeedhqApi\ItemInterface
 {
     public function getItem($id)
     {

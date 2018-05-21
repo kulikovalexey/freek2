@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Classes\LightspeedhqApi;
+
 Interface ItemInterface
 {
     public function getItem($id);

@@ -26,11 +26,11 @@ class Worker
         echo "Building Variants Mapping Data";
         // Truncate all databases
 //        $count = $api->products->count();
-        $count = $this->products->getNumberOfProducts();
+        $count = $this->products->getNumberOf();
 
         echo "Store has $count products<br>";
 //        $count = $api->variants->count();
-        $count = $this->variants->getNumberOfVariants();
+        $count = $this->variants->getNumberOf();
         echo "Store has $count variants<br>";
 
         $i = 0;
