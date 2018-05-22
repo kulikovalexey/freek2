@@ -3,21 +3,22 @@
 namespace App\Repository;
 
 use App\Classes\SupplierData\AbstractSupplierData;
-use App\Supplier1Product;
+use App\SupplierProduct;
 use PHPUnit\Runner\Exception;
 
 class Supplier1Repository extends AbstractRepository
 {
 
-    public function saveLoadingData($data)   //:TODO решить что принять за первичный все таки
+    public function saveLoadingData($data, $supplierData)   //:TODO решить что принять за первичный все таки
     {
-        Supplier1Product::truncate();
+//        Supplier1Product::truncate(); :TODO
 
-        foreach ($data as $item){
+        foreach ($data as &$item){
             if (empty($item['ean']) && empty($item['sku'])) continue;
-
+            $item['supplier_id'] = $supplierData->id;
             $item['priceIncl'] = $this->calculatePrice($item['priceIncl'], $item['brand']);
-            Supplier1Product::create($item);
+
+            SupplierProduct::create($item);
         }
 
     }

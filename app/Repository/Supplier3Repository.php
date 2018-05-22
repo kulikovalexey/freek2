@@ -7,7 +7,7 @@ class Supplier3Repository extends AbstractRepository
     /**
      * @param $data
      */
-    public function saveLoadingData($data)
+    public function saveLoadingData($data, $supplierData)
     {
     //       Supplier3Product::truncate();
 //        print_r($data);

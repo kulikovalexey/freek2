@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSupplier1ProductsTable extends Migration
+class CreateSupplierProductsTable extends Migration
 {
     /**
      * supplier1 products
@@ -29,7 +29,7 @@ class CreateSupplier1ProductsTable extends Migration
 
     public function up()
     {
-        Schema::create('supplier1_products', function (Blueprint $table) {
+        Schema::create('supplier_products', function (Blueprint $table) {
             $table->increments('id');
             $table->string('sku')->nullable();
             $table->string('articleCode');
@@ -38,12 +38,14 @@ class CreateSupplier1ProductsTable extends Migration
             $table->string('name');
             $table->float('priceIncl');
             $table->integer('stockLevel')->nullable();
+            $table->integer('supplier_id');
+            $table->integer('yourPriceExVatEur')->nullable();
         });
     }
 
 
     public function down()
     {
-        Schema::dropIfExists('supplier1_products');
+        Schema::dropIfExists('supplier_products');
     }
 }

@@ -19,19 +19,19 @@
                     <div class="panel-body">
                         <div class="input-group">
                             <label for="basic-url">Id</label>
-                            <input type="text" class="form-control form-control-lg"  value="{{ $info['id'] }}" disabled>
+                            <input type="text" class="form-control form-control-lg"  value="{{ $info->id }}" disabled>
                         </div>
                         <div class="input-group">
                             <label for="basic-url">Name</label>
-                            <input type="text" class="form-control form-control-lg" value="{{ $info['name'] }}" disabled>
+                            <input type="text" class="form-control form-control-lg" value="{{ $info->name }}" disabled>
                         </div>
                         <div class="input-group">
                             <label for="basic-url">Url</label>
-                            <input type="text" class="form-control form-control-lg" value="{{ $info['url'] }}" disabled>
+                            <input type="text" class="form-control form-control-lg" value="{{ $info->url }}" disabled>
                         </div>
                         <div class="input-group">
                             <label for="basic-url">Except brands</label><br>
-                            @foreach($info['exceptBrands'] as $item)
+                            @foreach($info->exceptBrands as $item)
                                 {{ $item }} <br>
                             @endforeach
                         </div>

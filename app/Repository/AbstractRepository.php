@@ -24,7 +24,7 @@ abstract class AbstractRepository
      * @param $data
      * @return mixed
      */
-    abstract public function saveLoadingData($data);
+    abstract public function saveLoadingData($data, $supplierData);
 
     /**
      * @param $price
