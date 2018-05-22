@@ -10,4 +10,9 @@ class Brand extends Model
 
     protected $fillable = ['id', 'name'];
 
+    public function products()
+    {
+        return $this->hasMany('App\StoreProduct', 'brand_id', 'id');
+    }
+
 }

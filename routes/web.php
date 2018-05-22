@@ -17,15 +17,7 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin', 'middleware'=>['auth']], 
         Route::resource('/user', 'UserController', ['as'=>'admin.user_managment']);
     });
 
-    // here routs
-
-
-
-
-
-
-
-
+    // :TODO here routs
 });
 
 Route::get('/', function () {
@@ -37,11 +29,10 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/home/products', 'HomeController@showStoreProducts');
 Route::get('/home/brands', 'HomeController@showStoreBrands')->name('home.brands');
+Route::get('/home/compare', 'HomeController@compareProducts');
 Route::get('/home/{supplier}', 'SupplierController@index')->where('supplier', 'supplier[0-9]+');
-
+# :TODO rename
 Route::get('/home/show/{supplier}', 'SupplierController@showSupplier')->where('supplier', 'supplier[0-9]+');
-
-
 
 //import from suppliers
 Route::get('/suppliers/{supplier}', 'ImportController@importSupplierData')->where('supplier', 'supplier[0-9]+');
