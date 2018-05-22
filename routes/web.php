@@ -44,16 +44,10 @@ Route::get('/home/show/{supplier}', 'SupplierController@showSupplier')->where('s
 
 
 //import from suppliers
-Route::get('/import/{supplier}', 'ImportController@import')->where('supplier', 'supplier[0-9]+');
-
-//brands from store
-Route::get('/store/brands', 'StoreController@getAllBrands');
+Route::get('/suppliers/{supplier}', 'ImportController@importSupplierData')->where('supplier', 'supplier[0-9]+');
 
 //products from store
-Route::get('/store/products', 'StoreController@importProducts');
+Route::get('/store/products', 'ImportController@importStoreProducts');
 
-
-
-// for hands
-// update price
-Route::get('/home/supplier1/update', 'Supplier1Controller@updatePrice');
+// brands
+Route::get('/store/brands', 'ImportController@importStoreBrands');

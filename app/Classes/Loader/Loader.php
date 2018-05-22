@@ -14,7 +14,7 @@ class Loader
     {
         $filePath = $this->setFilePath($supplier->fileName);
 
-        $this->deleteOldFile($filePath);
+        if(file_exists($filePath)) $this->deleteOldFile($filePath);
 
         $this->sendRequest($supplier->url, $filePath);
 

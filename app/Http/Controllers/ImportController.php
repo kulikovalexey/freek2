@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Repository\SupplierRepositoryFactory;
-use App\Classes\SupplierData\SupplierData;
-use App\Classes\Loader\Loader;
-use App\Classes\Parser\Parser;
+use App\Classes\StoreData\Brands;
 use Illuminate\Http\Request;
+use App\Classes\SupplierData\SupplierData;
+use App\Classes\Parser\Parser;
+use App\Classes\StoreData\Products;
+use App\Classes\StoreData\Variants;
+use App\Repository\SupplierRepositoryFactory;
+use App\Repository\StoreProductRepository;
+use App\Repository\VariantRepository;
+use App\Repository\BrandRepository;
 
 class ImportController extends Controller
 {
@@ -16,7 +21,7 @@ class ImportController extends Controller
     protected $suppliers;
     protected $args;
 
-    public function import(Request $request, $supplier)
+    public function importSupplierData(Request $request, $supplier)
     {
         $supplierData = new SupplierData(
             $this->getConfigSuppliers($supplier)
@@ -29,10 +34,35 @@ class ImportController extends Controller
         $supplierRepository->saveLoadingData($data, $supplierData);
     }
 
+
+    public function importStoreBrands()
+    {
+        $brandsData = (new Brands())->getAll();
+
+        (new BrandRepository())->saveBrands($brandsData);
+    }
+
+    public function importStoreProducts()
+    {
+        // api
+        $data = (new Products())->getAll();
+        (new StoreProductRepository())->saveLoadingData($data);
+
+        // api
+        $data = (new Variants())->getAll();
+        (new VariantRepository())->saveLoadingData($data);
+
+    }
+
+
+
+
     protected function getConfigSuppliers($supplier)
     {
         return config("suppliers.{$supplier}");
     }
+
+
 
 
 

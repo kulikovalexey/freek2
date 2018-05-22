@@ -70,13 +70,17 @@ return [
                                     //$toFields = "articleCode, stockLevel, priceIncl, sku";
 
         'dataProducts' => [
-            'sku'         => '1',
-            'articleCode' => '7',
-            'ean'         => '',
-            'priceIncl'   => '4',
-            'stockLevel'  => '5',
-            'brand'       => '',
-            'name'        => '',
+            'brand',
+            'sku',//         => '1',
+            'name', //       => '2',
+            'priceIncl', // => '4',
+            'stockLevel', // => '5',
+            'skip',  // ====
+            'articleCode',// => '7',
+//            'ean'         => '',
+            'skip',        // => '8',
+            'skip',        // => '9',
+
         ],
         'brands' => [
             'yealink',
