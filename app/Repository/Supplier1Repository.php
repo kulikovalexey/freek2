@@ -2,17 +2,13 @@
 
 namespace App\Repository;
 
-use App\Classes\SupplierData\AbstractSupplierData;
 use App\SupplierProduct;
-use PHPUnit\Runner\Exception;
 
 class Supplier1Repository extends AbstractRepository
 {
 
-    public function saveLoadingData($data, $supplierData)   //:TODO решить что принять за первичный все таки
+    public function saveLoadingData($data, $supplierData)
     {
-//        Supplier1Product::truncate(); :TODO
-
         foreach ($data as &$item){
             if (empty($item['ean']) && empty($item['sku'])) continue;
             $item['supplier_id'] = $supplierData->id;
@@ -20,7 +16,6 @@ class Supplier1Repository extends AbstractRepository
 
             SupplierProduct::create($item);
         }
-
     }
 
     /**
@@ -51,18 +46,4 @@ class Supplier1Repository extends AbstractRepository
     protected function isInBrandList($brand){
         return (! in_array(strtolower($brand), $this->supplierData->brands));
     }
-
-
 }
-
-/*
-
- [sku] => TD108R1X
-            [articleCode] => RSH-2898
-            [ean] =>
-            [priceIncl] => 0.50
-            [stockLevel] => 36
-            [brand] => ACT
-            [name] => RJ-45 (8P/8C) Connector voor soepele aders 1 stuk
-
- */
