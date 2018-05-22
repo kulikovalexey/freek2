@@ -8,6 +8,7 @@ class ParserCSV implements ParserInterface
 {
     public function parse(AbstractSupplierData $supplierData){
 
+        if ($supplierData->_name == 'supplier3') $this->createHeader($supplierData);  //:TODO refactoring
         $filePath = $this->setFilePath($supplierData->fileName);
 
         $csv = new \ParseCsv\Csv();
@@ -24,29 +25,36 @@ class ParserCSV implements ParserInterface
         }
 
         $csv->parse($filePath);
-        $arrColumns = $supplierData->dataProducts;
-        $columnsList = array_values($arrColumns);
 
-        array_walk($csv->data, function (&$a) use ($columnsList) {
-            foreach ($a as $k => $v){
-                if (!in_array($k, $columnsList)) {
-                    unset ($a[$k]);
+
+        if ($supplierData->_name != 'supplier3') {
+
+            $arrColumns = $supplierData->dataProducts;
+            $columnsList = array_values($arrColumns);
+
+            array_walk($csv->data, function (&$a) use ($columnsList) {
+                foreach ($a as $k => $v) {
+                    if (!in_array($k, $columnsList)) {
+                        unset ($a[$k]);
+                    }
                 }
-            }
-        });
+            });
 
-        $arrColumns = array_flip($arrColumns);
+            $arrColumns = array_flip($arrColumns);
 
-        array_walk($csv->data, function (&$a) use ($arrColumns) {
+            array_walk($csv->data, function (&$a) use ($arrColumns) {
 
-            foreach ($a as $k => $v) {
-                if ($arrColumns[$k] !== $k) {
-                    $a[$arrColumns[$k]] = $a[$k];
-                    unset ($a[$k]);
+                foreach ($a as $k => $v) {
+                    if ($arrColumns[$k] !== $k) {
+                        $a[$arrColumns[$k]] = $a[$k];
+                        unset ($a[$k]);
+                    }
                 }
-            }
-        });
+            });
+        }
 
+//        print_r($csv->data);
+//        exit;
         return $csv->data;
 
     }
@@ -69,6 +77,18 @@ class ParserCSV implements ParserInterface
             return true;
         }
         return false;
+    }
+
+    protected function createHeader($supplierData)
+    {
+        $filePath = $this->setFilePath($supplierData->fileName);
+
+        $handle = fopen($filePath, 'a');
+
+        fputcsv($handle, $supplierData->dataProducts);
+
+        fclose($handle);
+
     }
 
 }

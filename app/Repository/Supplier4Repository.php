@@ -2,14 +2,15 @@
 
 namespace App\Repository;
 
-use App\Supplier4Product;
+use App\SupplierProduct;
 
 class Supplier4Repository extends AbstractRepository
 {
     /**
      * @param $data
+     * @param $supplierData
      */
-    public function saveLoadingData($data, $supplierData)   //:TODO решить что принять за первичный все таки
+    public function saveLoadingData($data, $supplierData)
     {
         Supplier4Product::truncate();
 
@@ -18,7 +19,7 @@ class Supplier4Repository extends AbstractRepository
             if (!in_array(strtolower($this->brands), $this->supplierData->brands)) continue;
 
             $item['priceIncl'] = $this->calculatePrice($item['priceIncl']);
-            Supplier4Product::create($item);
+            SupplierProduct::create($item);
         }
     }
 

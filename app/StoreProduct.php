@@ -15,4 +15,10 @@ class StoreProduct extends Model
         'data01','data02','data03','brand_id','supplier_id',
         'stockLevel', 'priceIncl', 'sku', 'ean', 'articleCode', 'priceExcl',
     ];
+
+    public function brand()
+    {
+        $this->belongsTo('App\Brand', 'brand_id','id');
+    }
+
 }
