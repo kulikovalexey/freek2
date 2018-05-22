@@ -11,8 +11,6 @@ class CreateTableStoreProduct extends Migration
         Schema::create('store_products', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('createdAt');
-            $table->string('updatedAt');
             $table->string('visibility')->nullable();
             $table->string('data01')->nullable();
             $table->string('data02')->nullable();

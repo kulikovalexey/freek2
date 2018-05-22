@@ -24,7 +24,7 @@ abstract class AbstractRepository
      * @param $data
      * @return mixed
      */
-    abstract public function saveLoadingData($data);
+    abstract public function saveLoadingData($data, $supplierData);
 
     /**
      * @param $price
@@ -44,7 +44,7 @@ abstract class AbstractRepository
         $this->brands = BrandRepository::getBrandNameList();
     }
 
-    protected function isBrandInBlacklist($brand){
-        return (! in_array(strtolower($brand), $this->supplierData->exceptBrands));
+    protected function isInBrandList($brand){
+        return (! in_array(strtolower($brand), $this->supplierData->brands));
     }
 }

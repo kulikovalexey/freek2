@@ -31,7 +31,7 @@
                         </div>
                         <div class="input-group">
                             <label for="basic-url">Except brands</label><br>
-                            @foreach($info['exceptBrands'] as $item)
+                            @foreach($info['brands'] as $item)
                                 {{ $item }} <br>
                             @endforeach
                         </div>

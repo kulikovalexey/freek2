@@ -69,7 +69,7 @@ class Supplier2Repository extends AbstractRepository
 
 
 
-    public function saveLoadingData($data)   //:TODO решить что принять за первичный все таки
+    public function saveLoadingData($data, $supplierData)   //:TODO решить что принять за первичный все таки
     {
         unset($data);
 

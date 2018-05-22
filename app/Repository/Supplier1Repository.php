@@ -3,21 +3,22 @@
 namespace App\Repository;
 
 use App\Classes\SupplierData\AbstractSupplierData;
-use App\Supplier1Product;
+use App\SupplierProduct;
 use PHPUnit\Runner\Exception;
 
 class Supplier1Repository extends AbstractRepository
 {
 
-    public function saveLoadingData($data)   //:TODO решить что принять за первичный все таки
+    public function saveLoadingData($data, $supplierData)   //:TODO решить что принять за первичный все таки
     {
-        Supplier1Product::truncate();
+//        Supplier1Product::truncate(); :TODO
 
-        foreach ($data as $item){
+        foreach ($data as &$item){
             if (empty($item['ean']) && empty($item['sku'])) continue;
-
+            $item['supplier_id'] = $supplierData->id;
             $item['priceIncl'] = $this->calculatePrice($item['priceIncl'], $item['brand']);
-            Supplier1Product::create($item);
+
+            SupplierProduct::create($item);
         }
 
     }
@@ -29,7 +30,7 @@ class Supplier1Repository extends AbstractRepository
      */
     protected function calculatePrice($price, $brand)
     {
-        if ($this->isPriceMoreThan250($price) && $this->isBrandInBlacklist($brand)){
+        if ($this->isPriceMoreThan250($price) && $this->isInBrandList($brand)){
 
             return floor( $price * 1.21);
 
@@ -47,8 +48,8 @@ class Supplier1Repository extends AbstractRepository
         return ($price > 250);
     }
 
-    protected function isBrandInBlacklist($brand){
-        return (! in_array(strtolower($brand), $this->supplierData->exceptBrands));
+    protected function isInBrandList($brand){
+        return (! in_array(strtolower($brand), $this->supplierData->brands));
     }
 
 

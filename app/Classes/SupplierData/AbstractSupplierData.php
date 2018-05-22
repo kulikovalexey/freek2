@@ -12,7 +12,7 @@ abstract class AbstractSupplierData
     public $delimiter;
 
     public $dataProducts;
-    public $exceptBrands;
+    public $brands;
 
     public function __construct($params)
     {
@@ -25,7 +25,7 @@ abstract class AbstractSupplierData
         $this->delimiter = $params['delimiter'];
 
         $this->dataProducts = $params['dataProducts'];
-        $this->exceptBrands = $params['exceptBrands'];
+        $this->brands = $params['brands'];
     }
 
 

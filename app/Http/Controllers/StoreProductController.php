@@ -46,7 +46,7 @@ class StoreProductController extends Controller   //:TODO в фабрику
 
     protected function calculatePrice($price, $brand)
     {
-        if ($this->isPriceMoreThan250($price) && $this->isBrandInBlacklist($brand)){
+        if ($this->isPriceMoreThan250($price) && $this->isInBrandList($brand)){
 
             return floor( $price * 1.21);
 

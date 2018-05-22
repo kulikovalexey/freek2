@@ -29,7 +29,7 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin', 'middleware'=>['auth']], 
 });
 
 Route::get('/', function () {
-    return view('blog.home');
+    return view('home');
 });
 
 Auth::routes();
@@ -37,21 +37,14 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/home/products', 'StoreProductController@index');
 Route::get('/home/brands', 'BrandController@index')->name('home.brands');
-Route::get('/home/supplier1', 'Supplier1Controller@index');
-Route::get('/home/supplier2', 'Supplier2Controller@index');
-Route::get('/home/supplier3', 'Supplier3Controller@index');
-Route::get('/home/supplier4', 'Supplier4Controller@index');
+Route::get('/home/{supplier}', 'SupplierController@index')->where('supplier', 'supplier[0-9]+');
 
-
-Route::get('/home/show/supplier1', 'Supplier1Controller@showSupplier');
-Route::get('/home/show/supplier2', 'Supplier2Controller@showSupplier');
-Route::get('/home/show/supplier3', 'Supplier3Controller@showSupplier');
-Route::get('/home/show/supplier4', 'Supplier4Controller@showSupplier');
+Route::get('/home/show/{supplier}', 'SupplierController@showSupplier')->where('supplier', 'supplier[0-9]+');
 
 
 
 //import from suppliers
-Route::get('/import/{supplier}', 'ImportController@import')->where('supplier', 'supplier[0-9]+');;
+Route::get('/import/{supplier}', 'ImportController@import')->where('supplier', 'supplier[0-9]+');
 
 //brands from store
 Route::get('/store/brands', 'StoreController@getAllBrands');

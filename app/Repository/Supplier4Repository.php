@@ -9,7 +9,7 @@ class Supplier4Repository extends AbstractRepository
     /**
      * @param $data
      */
-    public function saveLoadingData($data)   //:TODO решить что принять за первичный все таки
+    public function saveLoadingData($data, $supplierData)   //:TODO решить что принять за первичный все таки
     {
         Supplier4Product::truncate();
 
@@ -27,7 +27,7 @@ class Supplier4Repository extends AbstractRepository
      */
     protected function calculatePrice($price)
     {
-        if (! $this->isBrandInBlacklist()) {
+        if (! $this->isInBrandList()) {
 
             return $price;
 
