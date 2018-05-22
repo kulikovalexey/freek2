@@ -35,6 +35,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home/products', 'StoreProductController@index');
 Route::get('/home/brands', 'BrandController@index')->name('home.brands');
 Route::get('/home/supplier1', 'Supplier1Controller@index');
 Route::get('/home/supplier2', 'Supplier2Controller@index');
@@ -50,7 +51,7 @@ Route::get('/home/show/supplier4', 'Supplier4Controller@showSupplier');
 
 
 //import from suppliers
-Route::get('/import/{supplier}', 'ImportController@import');
+Route::get('/import/{supplier}', 'ImportController@import')->where('supplier', 'supplier[0-9]+');;
 
 //brands from store
 Route::get('/store/brands', 'StoreController@getAllBrands');

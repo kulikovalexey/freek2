@@ -15,7 +15,7 @@
                     @endif
                 </div>
                 <div class="panel-body">
-                    <a href='lsc.php?getBrands'>Products from store</a><br>
+                    <a href='/home/products'>Products from store</a><br>
                     <a href='/home/brands'>Brands from store</a><br>
                     <a href='/home/supplier1'>Supplier1 Real Solutions Haarle (9183)</a><br>
                     <a href='/home/supplier2'>Supplier2 API BV (367457)</a><br>

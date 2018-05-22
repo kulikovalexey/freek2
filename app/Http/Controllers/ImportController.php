@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Repository\SupplierRepositoryFactory;
-use App\Classes\Supplier\SupplierData;
+use App\Classes\SupplierData\SupplierData;
 use App\Classes\Loader\Loader;
 use App\Classes\Parser\Parser;
 use Illuminate\Http\Request;

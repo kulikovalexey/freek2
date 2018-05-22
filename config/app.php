@@ -186,8 +186,6 @@ return [
         //Own providers
         App\Providers\BlogServiceProvider::class,
 
-        Intervention\Image\ImageServiceProvider::class,
-
         Gunharth\Lightspeed\LightspeedServiceProvider::class,
     ],
 
@@ -237,7 +235,6 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'Image' => Intervention\Image\Facades\Image::class,
         'ShopApi' => Gunharth\Lightspeed\LightspeedFacade::class,
 
     ],
