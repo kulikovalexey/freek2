@@ -36,7 +36,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/home/products', 'HomeController@showStoreProducts');
-Route::get('/home/brands', 'BrandController@index')->name('home.brands');
+Route::get('/home/brands', 'HomeController@showStoreBrands')->name('home.brands');
 Route::get('/home/{supplier}', 'SupplierController@index')->where('supplier', 'supplier[0-9]+');
 
 Route::get('/home/show/{supplier}', 'SupplierController@showSupplier')->where('supplier', 'supplier[0-9]+');

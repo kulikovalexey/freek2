@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Repository\BrandRepository;
 use Illuminate\Http\Request;
 use App\StoreProduct;
+use App\Brand;
 
 class HomeController extends Controller
 {
@@ -33,6 +35,15 @@ class HomeController extends Controller
 
         return view('products.index', [
             'products' => $products,
+        ]);
+    }
+
+    public function showStoreBrands()
+    {
+        $brands = Brand::paginate(20);
+
+        return view('brand.index', [
+            'brands' => $brands,
         ]);
     }
 }
