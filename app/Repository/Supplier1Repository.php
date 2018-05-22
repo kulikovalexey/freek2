@@ -49,7 +49,7 @@ class Supplier1Repository extends AbstractRepository
     }
 
     protected function isBrandInBlacklist($brand){
-        return (! in_array(strtolower($brand), $this->supplierData->exceptBrands));
+        return (! in_array(strtolower($brand), $this->supplierData->brands));
     }
 
 

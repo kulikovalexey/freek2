@@ -30,8 +30,8 @@
                             <input type="text" class="form-control form-control-lg" value="{{ $info->url }}" disabled>
                         </div>
                         <div class="input-group">
-                            <label for="basic-url">Except brands</label><br>
-                            @foreach($info->exceptBrands as $item)
+                            <label for="basic-url">Brands</label><br>
+                            @foreach($info->brands as $item)
                                 {{ $item }} <br>
                             @endforeach
                         </div>
