@@ -44,7 +44,7 @@ abstract class AbstractRepository
         $this->brands = BrandRepository::getBrandNameList();
     }
 
-    protected function isBrandInBlacklist($brand){
-        return (! in_array(strtolower($brand), $this->supplierData->exceptBrands));
+    protected function isInBrandList($brand){
+        return (! in_array(strtolower($brand), $this->supplierData->brands));
     }
 }

@@ -38,7 +38,7 @@ class Supplier3Repository extends AbstractRepository
      */
     protected function calculatePrice($price)
     {
-        if (!$this->isBrandInBlacklist()) {
+        if (!$this->isInBrandList()) {
 
             return $price;
 

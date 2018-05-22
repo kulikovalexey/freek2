@@ -30,7 +30,7 @@ class Supplier1Repository extends AbstractRepository
      */
     protected function calculatePrice($price, $brand)
     {
-        if ($this->isPriceMoreThan250($price) && $this->isBrandInBlacklist($brand)){
+        if ($this->isPriceMoreThan250($price) && $this->isInBrandList($brand)){
 
             return floor( $price * 1.21);
 
@@ -48,8 +48,8 @@ class Supplier1Repository extends AbstractRepository
         return ($price > 250);
     }
 
-    protected function isBrandInBlacklist($brand){
-        return (! in_array(strtolower($brand), $this->supplierData->exceptBrands));
+    protected function isInBrandList($brand){
+        return (! in_array(strtolower($brand), $this->supplierData->brands));
     }
 
 

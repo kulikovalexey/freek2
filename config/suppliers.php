@@ -19,7 +19,7 @@ return [
             'name'        => 'Name',
             'yourPriceExVatEur' => 'Your price ex. VAT EUR',
         ],
-        'exceptBrands' => [
+        'brands' => [
             'synology',
             'g-technology',
             'hikvision',
@@ -44,7 +44,7 @@ return [
             'brand'       => 'manufacturer',
             'name'        => 'title',
         ],
-        'exceptBrands' => [
+        'brands' => [
             'apple',
             'hgst',
             'asus',
@@ -78,7 +78,7 @@ return [
             'brand'       => '',
             'name'        => '',
         ],
-        'exceptBrands' => [
+        'brands' => [
             'yealink',
             'engenius',
             'zyxel',
@@ -104,7 +104,7 @@ return [
             'brand'       => 'brand',
             'name'        => 'product_name',
         ],
-        'exceptBrands' => [
+        'brands' => [
             'mikrotik',
             'ubiquiti'
         ]
