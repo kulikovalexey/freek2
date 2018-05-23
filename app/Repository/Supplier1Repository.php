@@ -9,6 +9,8 @@ class Supplier1Repository extends AbstractRepository
 
     public function saveLoadingData($data, $supplierData)
     {
+       $this->removeOldData($supplierData);
+
         foreach ($data as &$item){
             if (empty($item['ean']) && empty($item['sku'])) continue;
             $item['supplier_id'] = $supplierData->id;
@@ -46,4 +48,5 @@ class Supplier1Repository extends AbstractRepository
     protected function isInBrandList($brand){
         return (! in_array(strtolower($brand), $this->supplierData->brands));
     }
+
 }

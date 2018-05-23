@@ -12,7 +12,7 @@ class Supplier4Repository extends AbstractRepository
      */
     public function saveLoadingData($data, $supplierData)
     {
-        SupplierProduct::truncate();
+        $this->removeOldData($supplierData);
 
         foreach ($data as $item) {
             if (empty($item['ean']) && empty($item['sku'])) continue;

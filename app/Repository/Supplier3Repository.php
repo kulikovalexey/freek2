@@ -9,7 +9,8 @@ class Supplier3Repository extends AbstractRepository
      */
     public function saveLoadingData($data, $supplierData)
     {
-    //       Supplier3Product::truncate();
+        //$this->removeOldData($supplierData);
+    //       $this->removeOldData($supplierData);
 //        print_r($data);
 //
 ////        foreach ($data as $item){
