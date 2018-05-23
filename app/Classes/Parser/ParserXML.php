@@ -3,7 +3,7 @@
 namespace App\Classes\Parser;
 
 use App\Classes\SupplierData\AbstractSupplierData;
-use App\Supplier4Product;
+use App\SupplierProduct;
 
 class ParserXML implements ParserInterface
 {
@@ -22,6 +22,7 @@ class ParserXML implements ParserInterface
 
             $xml = simplexml_load_file($filePath, 'SimpleXMLElement', LIBXML_NOCDATA);
 
+
             if (!$xml) {
                 foreach (libxml_get_errors() as $error) {
                     Log::error('Error loading XML:' . $error->message);
@@ -34,61 +35,29 @@ class ParserXML implements ParserInterface
                     if (empty($item)) $cnt++;
 
                 }
-//
-                foreach ($xml->product as $item) {
-                    $product = new Supplier4Product();
 
-                    $product->sku = $item->product_code;
-                    $product->articleCode = $item->product_id;
-                    $product->ean = $item->ean;
-                    $product->priceIncl = $item->prijs;
-                    $product->stockLevel = $item->stock;
-                    $product->brand = $item->brand;
-                    $product->name = $item->product_name;
-                    $product->save();
+                $data = [];
+                $i = 0;
+
+                foreach ($xml->product as $item) {  //
+
+                    // for supplier 4
+                    if (!isset($item->product_code) && !isset($item->ean)) continue;
+
+                    $data[$i]['sku'] = (string) $item->product_code;
+                    $data[$i]['articleCode'] = (int) $item->product_id;
+                    $data[$i]['ean'] = (string) $item->ean;
+                    $data[$i]['priceIncl'] = (float)$item->prijs;
+                    $data[$i]['stockLevel'] = (int) $item->stock;
+                    $data[$i]['brand'] = (string) $item->brand;
+                    $data[$i]['name'] = (string) $item->product_name;
+                    $data[$i]['supplier_id'] = $supplierData->id;
+                    $i++;
                 }
-//
-//
-//                }
-
-
-//
-//
-//                    foreach ($productParse as $k => $v){
-//
-//                        echo $productParse->$arrColumns[$k];
-//
-//                    }
-//
-//
-//                    $arrColumns = $supplierData->dataProducts;
-//                    $columnsList = array_values($arrColumns);
-//
-//                    array_walk($csv->data, function (&$a) use ($columnsList) {
-//                        foreach ($a as $k => $v){
-//                            if (!in_array($k, $columnsList)) {
-//                                unset ($a[$k]);
-//                            }
-//                        }
-//                    });
-//
-//
-//
-//                    array_walk($csv->data, function (&$a) use ($arrColumns) {
-//                        foreach ($a as $k => $v){
-//                            if($arrColumns[$k] !== $k) {
-//                                $a[$arrColumns[$k]] = $a[$k];
-//                                unset ($a[$k]);
-//                            }
-//                        }
-//                    });
-                //   }
-
             }
-            exit;
 
+            return $data;
         }
-
 
     }
 

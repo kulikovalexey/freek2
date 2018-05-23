@@ -35,7 +35,7 @@ Route::get('/home/{supplier}', 'SupplierController@index')->where('supplier', 's
 Route::get('/home/show/{supplier}', 'SupplierController@showSupplier')->where('supplier', 'supplier[0-9]+');
 
 //import from suppliers
-Route::get('/suppliers/{supplier}', 'ImportController@importSupplierData')->where('supplier', 'supplier[0-9]+');
+Route::get('/import/{supplier}', 'ImportController@importSupplierData')->where('supplier', 'supplier[0-9]+');
 
 //products from store
 Route::get('/store/products', 'ImportController@importStoreProducts');

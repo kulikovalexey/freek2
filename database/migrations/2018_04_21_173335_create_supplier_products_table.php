@@ -36,7 +36,7 @@ class CreateSupplierProductsTable extends Migration
             $table->string('ean')->nullable();
             $table->string('brand')->nullable();
             $table->string('name');
-            $table->float('priceIncl');
+            $table->float('priceIncl')->nullable();
             $table->integer('stockLevel')->nullable();
             $table->integer('supplier_id');
             $table->integer('yourPriceExVatEur')->nullable();
