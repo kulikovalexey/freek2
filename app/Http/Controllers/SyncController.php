@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Classes\StoreData\Brands;
 use Illuminate\Http\Request;
-use App\Classes\SupplierData\SupplierData;
-use App\Classes\Parser\Parser;
-use App\Classes\StoreData\Products;
-use App\Classes\StoreData\Variants;
-use App\Repository\SupplierRepositoryFactory;
-use App\Repository\StoreProductRepository;
-use App\Repository\VariantRepository;
-use App\Repository\BrandRepository;
+//use App\Classes\StoreData\Brands;
+//use App\Classes\SupplierData\SupplierData;
+//use App\Classes\Parser\Parser;
+//use App\Classes\StoreData\Products;
+//use App\Classes\StoreData\Variants;
+//use App\Repository\SupplierRepositoryFactory;
+//use App\Repository\StoreProductRepository;
+//use App\Repository\VariantRepository;
+//use App\Repository\BrandRepository;
+use ShopApi;
 
 class SyncController extends Controller
 {
@@ -21,38 +22,61 @@ class SyncController extends Controller
     protected $suppliers;
     protected $args;
 
-    public function syncSupplierData(Request $request, $supplier)
+
+    // :TODO rebase all to repositories
+
+    public function createProduct()
     {
-//        $supplierData = new SupplierData(
-//            $this->getConfigSuppliers($supplier)
-//        );
-//
-////        (new Loader())->downloadFile($supplierData); // :TODO uncomment
-//        $data = (new Parser())->parse($supplierData);
-//
-//        $supplierRepository = (new SupplierRepositoryFactory())->makeSupplierRepository($supplierData);
-//        $supplierRepository->saveLoadingData($data, $supplierData);
+        //:TODO добавился //72001535
+//        $resp =ShopApi::products()->create([
+//            "visibility"    => "hidden",
+//            "data01"        => "",
+//            "data02"        => "",
+//            "data03"        => "",
+//            "title"         => "TEST_title",
+//            "fulltitle"     => "TEST_fulltitle",
+//            "description"   => "TEST_description",
+//            "content"       => "TEST_CONTENT",
+//            "deliverydate"  => 1,
+//            "supplier"      => 2,
+//            "brand"         => 3
+//        ]);
+//        print_r($resp);
     }
 
 
-    public function syncStoreBrands()
+
+    public function updateProduct()
     {
-//        $brandsData = (new Brands())->getAll();
-//
-//        (new BrandRepository())->saveBrands($brandsData);
+        $resp = ShopApi::products()->update('72001535', [
+            "title"         => "TEST_title_updated",
+            "fulltitle"     => "TEST_fulltitle_updated",
+            "description"   => "TEST_description_updated",
+            "content"       => "TEST_CONTENT_updated",
+        ]);
+
+        print_r($resp);
     }
 
-    public function syncStoreProducts()
-    {
-//        // api
-//        $data = (new Products())->getAll();
-//        (new StoreProductRepository())->saveLoadingData($data);
-//
-//        // api
-//        $data = (new Variants())->getAll();
-//        (new VariantRepository())->saveLoadingData($data);
 
+    public function deleteProduct()
+    {
+        $product_id = 72001535;
+        $resp = ShopApi::products()->delete($product_id);
+        print_r($resp);
     }
+
+
+//
+//    public function syncStoreBrands()
+//    {
+////
+//    }
+//
+//    public function syncStoreProducts()
+//    {
+////
+//    }
 
 
 

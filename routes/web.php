@@ -25,4 +25,8 @@ Route::group(['middleware' => ['auth']], function () {
     //import from store
     Route::get('/store/products', 'ImportController@importStoreProducts');
     Route::get('/store/brands', 'ImportController@importStoreBrands');
+
+    Route::post('/create-product', 'SyncController@createProduct');
+    Route::put('/update-product', 'SyncController@updateProduct');
+    Route::delete('/delete-product', 'SyncController@deleteProduct');
 });
