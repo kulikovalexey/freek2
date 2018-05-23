@@ -23,6 +23,29 @@ class SyncController extends Controller
     protected $args;
 
 
+
+    // выбрать все данные
+    public function index()
+    {
+
+    }
+
+
+
+
+//
+//    public function syncStoreBrands()
+//    {
+////
+//    }
+//
+//    public function syncStoreProducts()
+//    {
+////
+//    }
+
+
+
     // :TODO rebase all to repositories
 
     public function createProduct()
@@ -46,7 +69,7 @@ class SyncController extends Controller
 
 
 
-    public function updateProduct()
+    public function updateProduct()  //remove test data
     {
         $resp = ShopApi::products()->update('72001535', [
             "title"         => "TEST_title_updated",
@@ -65,20 +88,6 @@ class SyncController extends Controller
         $resp = ShopApi::products()->delete($product_id);
         print_r($resp);
     }
-
-
-//
-//    public function syncStoreBrands()
-//    {
-////
-//    }
-//
-//    public function syncStoreProducts()
-//    {
-////
-//    }
-
-
 
 
     protected function getConfigSuppliers($supplier)
