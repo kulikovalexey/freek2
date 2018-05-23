@@ -14,20 +14,20 @@ class Loader
     {
         $filePath = $this->setFilePath($supplier->fileName);
 
-        if(file_exists($filePath)) $this->deleteOldFile($filePath);
+        if (file_exists($filePath)) $this->deleteOldFile($filePath);
 
         $this->sendRequest($supplier->url, $filePath);
 
-        if (file_exists($filePath)){
+        if (file_exists($filePath)) {
             return true;
         } else {
             throw new \Exception('File not uploaded');
         }
     }
 
-    protected function setFilePath($fileName, $storagePath = '..'. DIRECTORY_SEPARATOR . 'tmp')  //:TODO refactoring
+    protected function setFilePath($fileName, $storagePath = '..' . DIRECTORY_SEPARATOR . 'tmp')  //:TODO refactoring
     {
-        return  $storagePath . DIRECTORY_SEPARATOR . $fileName;
+        return $storagePath . DIRECTORY_SEPARATOR . $fileName;
     }
 
 
@@ -45,8 +45,4 @@ class Loader
             ['sink' => $filePath]
         );
     }
-
-    //:TODO еще одна попытка
-//    public function
-
 }

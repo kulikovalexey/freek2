@@ -12,6 +12,7 @@ use App\Repository\SupplierRepositoryFactory;
 use App\Repository\StoreProductRepository;
 use App\Repository\VariantRepository;
 use App\Repository\BrandRepository;
+use App\Classes\Loader\Loader;
 
 class ImportController extends Controller
 {
@@ -27,7 +28,7 @@ class ImportController extends Controller
             $this->getConfigSuppliers($supplier)
         );
 
-//        (new Loader())->downloadFile($supplierData); // :TODO uncomment
+        (new Loader())->downloadFile($supplierData); // :TODO uncomment
         $data = (new Parser())->parse($supplierData);
 
         $supplierRepository = (new SupplierRepositoryFactory())->makeSupplierRepository($supplierData);
