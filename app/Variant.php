@@ -17,13 +17,13 @@ class Variant extends Model
 
     public function storeProduct()
     {
-        return $this->hasOne('App\StoreProduct', 'id','product_id');  //:TODO not working
+        return $this->belongsTo(StoreProduct::class, 'product_id', 'id');
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function supplier()
+    public function supplierProduct()
     {
         return $this->hasOne('App\SupplierProduct', 'articleCode','articleCode');
     }

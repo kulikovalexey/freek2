@@ -31,7 +31,7 @@ class HomeController extends Controller
 
     public function showStoreProducts()
     {
-        $products = StoreProduct::paginate(20);
+        $products = StoreProduct::with('variant')->paginate(20);
 
         return view('products.index', [
             'products' => $products,

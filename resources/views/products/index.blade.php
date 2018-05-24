@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Supplier</div>  {{-- :TODO переименовать --}}
+                    <div class="panel-heading">Store products</div>  {{-- :TODO переименовать --}}
 
 
                     <div class="panel-body">
@@ -53,7 +53,7 @@
                                 <th>sku</th>
                                 <th>ean</th>
                                 <th>articleCode</th>
-                                <th>priceExcl</th>
+                                {{--<th>priceExcl</th>--}}
                             </tr>
                             </thead>
                             <tbody>
@@ -67,12 +67,12 @@
                                 <td>{{ $product->data03 }}</td>
                                 <td>{{ $product->brand_id }}</td>
                                 <td>{{ $product->supplier_id }}</td>
-                                <td>{{ $product->stockLevel }}</td>
-                                <td>{{ $product->priceIncl }}</td>
-                                <td>{{ $product->sku }}</td>
-                                <td>{{ $product->ean }}</td>
-                                <td>{{ $product->articleCode }}</td>
-                                <td>{{ $product->priceExcl }}</td>
+                                <td>{{ $product->variant['stockLevel'] }}</td>
+                                <td>{{ $product->variant['priceIncl'] }}</td>
+                                <td>{{ $product->variant['sku'] }}</td>
+                                <td>{{ $product->variant['ean'] }}</td>
+                                <td>{{ $product->variant['articleCode'] }}</td>
+{{--                                <td>{{ $product->variant['priceExcl'] }}</td>--}}
                             </tr>
                         @endforeach
                             </tbody>

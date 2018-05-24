@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Supplier</div>  {{-- :TODO переименовать --}}
+                    <div class="panel-heading">Supplier {{  $suppliers[0]->supplier_id  }}</div>  {{-- :TODO переименовать --}}
 
 
                     <div class="panel-body">
@@ -22,13 +22,14 @@
                             <thead>
                             <tr>
                                 <th></th>
-                                <th>id</th>
                                 <th>sku</th>
                                 <th>ean</th>
                                 <th>name</th>
                                 <th>brand</th>
-                                <th>stockLevel</th>
-                                <th>priceIncl</th>
+                                <th>stockLevel (old)</th>
+                                <th>stockLevel (new)</th>
+                                <th>priceIncl (old)</th>
+                                <th>priceIncl (new)</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -41,12 +42,13 @@
                                         <button class="btn btn-update">update</button>
                                     </form>
                                 </td>
-                                <td>{{ $supplier->id }}</td>
                                 <td>{{ $supplier->sku }}</td>
                                 <td>{{ $supplier->ean }}</td>
                                 <td>{{ $supplier->name }}</td>
                                 <td>{{ $supplier->brand }}</td>
+                                <td>{{ $supplier->variant['stockLevel'] }}</td>
                                 <td>{{ $supplier->stockLevel }}</td>
+                                <td>{{ $supplier->variant['priceIncl'] }}</td>
                                 <td>{{ $supplier->priceIncl }}</td>
                             </tr>
                         @endforeach

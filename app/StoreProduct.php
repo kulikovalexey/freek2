@@ -21,13 +21,13 @@ class StoreProduct extends Model
         return $this->belongsTo('App\Brand', 'brand_id','id');
     }
 
-    public function suppliers()
+    public function supplierProduct()
     {
         return $this->hasMany('App\SupplierProduct', 'supplier_id', 'supplier_id');
     }
 
     public function variant()
     {
-        return $this->belongsTo('App\Variant', 'product_id', 'id');
+        return $this->hasOne(Variant::class, 'product_id', 'id');
     }
 }
