@@ -17,28 +17,9 @@ class SupplierController extends Controller
             $this->getConfigSuppliers($supplier)
         );
 
-        $suppliers = SupplierProduct::where('supplier_id', $supplierData->id)->with(
-            'variant')->paginate(20);
-
-//        /*
-//        DB::table('notices')
-//        ->join('users', 'notices.user_id', '=', 'users.id')
-//        ->join('departments', 'users.dpt_id', '=', 'departments.id')
-//        ->select('notices.id', 'notices.title', 'notices.body', 'notices.created_at', 'notices.updated_at', 'users.name', 'departments.department_name')
-//        ->paginate(20);
-//        */
-//
-//
-//
-//        $suppliers = \DB::table('store_products')
-//            ->leftJoin('variants', 'store_products.id', '=', 'variants.product_id' )
-//            ->leftJoin('brands', 'store_products.brand_id', '=', 'brands.id' )
-//            ->rightJoin('supplier_products', 'variants.articleCode', '=', 'supplier_products.articleCode' )
-//            ->where('supplier_products.supplier_id', '=', $supplierData->id )
-//            ->paginate(20);
-//
-////        print_r($suppliers);
-////exit;
+        $suppliers = SupplierProduct::where('supplier_id', $supplierData->id)
+            ->with('variant')
+            ->paginate(20);
 
          return view('supplier.index', [
             'suppliers' => $suppliers,

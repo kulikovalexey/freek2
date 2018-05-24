@@ -7,14 +7,38 @@ use ShopApi;
 
 class Products implements \App\Classes\StoreData\ItemInterface
 {
+//    public function getAll()
+//    {
+//        $numberOfProducts = $this->getNumberOf();
+//        $pages = ceil($numberOfProducts / 255);
+//
+//
+//        $products = [];
+//        for ($i = 1; $i < $pages; $i++) {
+//            $newProducts = ShopApi::products()->get(null, [
+//                'page' => $i,
+//                'fields' => "id,createdAt,updatedAt,visibility,data01,data02,data03,title,brand,supplier",
+//                'limit' => 255
+//            ]);
+//
+//            $products = array_merge($products, $newProducts);
+//
+//        }
+//        return $products;
+//    }
+
     public function getAll()
     {
-        $numberOfProducts = $this->getNumberOf();
-        $pages = ceil($numberOfProducts / 255);
+        $count = $this->getNumberOf();
 
-
+        $i = 0;
         $products = [];
-        for ($i = 1; $i < $pages; $i++) {
+
+        while ($count > 0) {
+            if ($i++ > 20) {
+                echo "Error: Max fetch reached. Increase fetch data";
+                break;
+            }
             $newProducts = ShopApi::products()->get(null, [
                 'page' => $i,
                 'fields' => "id,createdAt,updatedAt,visibility,data01,data02,data03,title,brand,supplier",
@@ -22,9 +46,11 @@ class Products implements \App\Classes\StoreData\ItemInterface
             ]);
 
             $products = array_merge($products, $newProducts);
-
+            $count -= 255;
         }
+
         return $products;
+
     }
 
 

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container-fluent">
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
@@ -22,6 +22,7 @@
                             <thead>
                             <tr>
                                 <th></th>
+                                <th>articleCode</th>
                                 <th>sku</th>
                                 <th>ean</th>
                                 <th>name</th>
@@ -36,12 +37,17 @@
                         @foreach($suppliers as $supplier)
                             <tr>
                                 <td>
-                                    <form action="{{ route('update.product', $supplier->id) }}" method="POST">
+                                    <form action="{{ route('update.product', $supplier->articleCode) }}" method="POST">
                                         {{ method_field('PUT') }}
                                         {{ csrf_field() }}
                                         <button class="btn btn-update">update</button>
                                     </form>
                                 </td>
+
+
+
+                                <td>{{ ( isset ($supplier->variant['articleCode'])) ? $supplier->articleCode : $supplier->articleCode . ' new'  }}</td>
+                                {{--<td>{{ $supplier->articleCode }}</td>--}}
                                 <td>{{ $supplier->sku }}</td>
                                 <td>{{ $supplier->ean }}</td>
                                 <td>{{ $supplier->name }}</td>

@@ -12,7 +12,7 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin', 'middleware'=>['auth']], 
     });
 });
 
-Route::group(['middleware' => ['auth']], function () {
+//Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/home/products', 'HomeController@showStoreProducts');
@@ -23,10 +23,10 @@ Route::group(['middleware' => ['auth']], function () {
     //import from suppliers
 //    Route::get('/import/{supplier}', 'ImportController@importSupplierData')->where('supplier', 'supplier[0-9]+');
     //import from store
-//    Route::get('/store/products', 'ImportController@importStoreProducts');
+    Route::get('/store/products', 'ImportController@importStoreProducts');
 //    Route::get('/store/brands', 'ImportController@importStoreBrands');
 
     Route::post('/create-product', 'SyncController@createProduct');
-    Route::put('/update-product/{id}', 'SyncController@updateProduct')->name('update.product');
+    Route::put('/update-product/{articleCode}', 'SyncController@updateProduct')->name('update.product');
     Route::delete('/delete-product', 'SyncController@deleteProduct');
-});
+//});

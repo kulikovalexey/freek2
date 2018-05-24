@@ -18,7 +18,6 @@ class CreateTableStoreProduct extends Migration
             $table->integer('brand_id')->nullable();
             $table->integer('supplier_id')->nullable();
             $table->string('priceExcl')->nullable();  //:TODO remove
-            /// // variants?product=71488622
 
         });
     }

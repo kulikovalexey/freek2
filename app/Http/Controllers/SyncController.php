@@ -47,6 +47,25 @@ class SyncController extends Controller
         return $resp;
     }
 
+
+    public function sybnc(Request $request)
+    {
+        $dataForUpdate = Variant::where('articleCode', '=', $request->articleCode)->get()->toArray();
+
+
+        if(!isset($dataForUpdate[0]['product_id'])) {
+
+            $this->createProduct();
+
+        } else {
+
+            $this->updateProduct();
+
+        }
+
+    }
+
+
     public function createVariant($data)  //:TODO prepare data
     {
         $resp = ShopApi::variants()->create([
@@ -63,14 +82,29 @@ class SyncController extends Controller
 
     public function updateProduct(Request $request)  //remove test data
     {
-//        $product = Variant::where('product_id', '=', 13254711)->get();
-        $newProductData = Variant::with('supplier')->find(20894911)->get();
+        $dataForUpdate = Variant::where('articleCode', '=', $request->articleCode)->get()->toArray();
 
 
-//        $product = StoreProduct::find($request->id)->get();
-        print_r($newProductData);
+        if(!isset($dataForUpdate[0]['product_id'])) {
+            echo 'new product'; exit;
+        }
+
+        $isStaticPrice = StoreProduct::findOrFail(13359801);  //for check static price
+        print_r($isStaticPrice);
         exit;
+        print_r($isStaticPrice);
 
+
+//        if(){
+//
+//        }
+
+
+
+
+
+
+        exit;
         $resp = ShopApi::products()->update($newProductData->id, [
             "title"         => "TEST_title_updated",
             "fulltitle"     => "TEST_fulltitle_updated",

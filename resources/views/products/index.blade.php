@@ -21,25 +21,10 @@
                         <table class="table table-striped">
                             <thead>
                             <tr>
-
-                                {{--$table->increments('id');--}}
-                                {{--$table->string('name');--}}
-                                {{--$table->string('createdAt');--}}
-                                {{--$table->string('updatedAt');--}}
-                                {{--$table->string('visibility')->nullable();--}}
-                                {{--$table->string('data01')->nullable();--}}
-                                {{--$table->string('data02')->nullable();--}}
-                                {{--$table->string('data03')->nullable();--}}
-                                {{--$table->integer('brand_id')->nullable();--}}
-                                {{--$table->integer('supplier_id')->nullable();--}}
-                                {{--$table->string('priceExcl')->nullable();--}}
-
-                                {{--$table->string('articleCode')->nullable();--}}
-                                {{--$table->string('ean')->nullable();--}}
-                                {{--$table->string('sku')->nullable();  //:TODO ключ?--}}
-                                {{--$table->integer('priceIncl')->nullable();--}}
-                                {{--$table->integer('stockLevel')->nullable();--}}
                                 <th>id</th>
+                                <th>articleCode</th>
+                                <th>sku</th>
+                                <th>ean</th>
                                 <th>name</th>
                                 <th>visibility</th>
                                 <th>data01</th>
@@ -50,16 +35,15 @@
 
                                 <th>stockLevel</th>
                                 <th>priceIncl</th>
-                                <th>sku</th>
-                                <th>ean</th>
-                                <th>articleCode</th>
-                                {{--<th>priceExcl</th>--}}
                             </tr>
                             </thead>
                             <tbody>
                         @foreach($products as $product)
                             <tr>
                                 <td>{{ $product->id }}</td>
+                                <td>{{ $product->variant['articleCode'] }}</td>
+                                <td>{{ $product->variant['sku'] }}</td>
+                                <td>{{ $product->variant['ean'] }}</td>
                                 <td>{{ $product->name }}</td>
                                 <td>{{ $product->visibility }}</td>
                                 <td>{{ $product->data01 }}</td>
@@ -69,10 +53,6 @@
                                 <td>{{ $product->supplier_id }}</td>
                                 <td>{{ $product->variant['stockLevel'] }}</td>
                                 <td>{{ $product->variant['priceIncl'] }}</td>
-                                <td>{{ $product->variant['sku'] }}</td>
-                                <td>{{ $product->variant['ean'] }}</td>
-                                <td>{{ $product->variant['articleCode'] }}</td>
-{{--                                <td>{{ $product->variant['priceExcl'] }}</td>--}}
                             </tr>
                         @endforeach
                             </tbody>

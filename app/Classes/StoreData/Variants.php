@@ -18,7 +18,7 @@ class Variants implements  \App\Classes\StoreData\ItemInterface
         $count = $this->getNumberOf();
 
         $i = 0;
-        $products = [];
+        $variants = [];
 
         while ($count > 0) {
             if ($i++ > 20) {
@@ -31,11 +31,11 @@ class Variants implements  \App\Classes\StoreData\ItemInterface
                 'limit' => 255
             ]);
 
-            $products = array_merge($products, $newVariants);
+            $variants = array_merge($variants, $newVariants);
             $count -= 255;
         }
 
-        return $products;
+        return $variants;
 
     }
 
