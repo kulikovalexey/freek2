@@ -48,7 +48,7 @@ class SyncController extends Controller
     }
 
 
-    public function sybnc(Request $request)
+    public function sync(Request $request)
     {
         $dataForUpdate = Variant::where('articleCode', '=', $request->articleCode)->get()->toArray();
 
@@ -82,11 +82,15 @@ class SyncController extends Controller
 
     public function updateProduct(Request $request)  //remove test data
     {
+//        validate articleCode supplier_id
+
         $dataForUpdate = Variant::where('articleCode', '=', $request->articleCode)->get()->toArray();
 
 
-        if(!isset($dataForUpdate[0]['product_id'])) {
-            echo 'new product'; exit;
+        if(!isset($dataForUpdate[0]['product_id'])) {//:TODO rebase to methods
+            echo 'added new product'; exit;   $this->createProduct($data);
+        } else {
+            echo 'updated product'; exit;  $this->updateProduct($data);
         }
 
         $isStaticPrice = StoreProduct::findOrFail(13359801);  //for check static price
