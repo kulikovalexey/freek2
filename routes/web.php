@@ -10,9 +10,9 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin', 'middleware'=>['auth']], 
     Route::group(['prefix' => 'user_managment', 'namespace' => 'UserManagment'], function(){
         Route::resource('/user', 'UserController', ['as'=>'admin.user_managment']);
     });
+});
 
-
-//Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/home/products', 'HomeController@showStoreProducts');
@@ -29,6 +29,4 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin', 'middleware'=>['auth']], 
     Route::post('/create-product', 'SyncController@createProduct');
     Route::put('/update-product/{articleCode}', 'SyncController@updateProduct')->name('update.product');
     Route::delete('/delete-product', 'SyncController@deleteProduct');
-//});
-
 });
