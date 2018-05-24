@@ -59,7 +59,7 @@
                             <tbody>
                         @foreach($products as $product)
                             <tr>
-                                <td>{{ $product->_id }}</td>
+                                <td>{{ $product->id }}</td>
                                 <td>{{ $product->name }}</td>
                                 <td>{{ $product->visibility }}</td>
                                 <td>{{ $product->data01 }}</td>

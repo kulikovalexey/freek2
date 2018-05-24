@@ -16,3 +16,10 @@ SELECT supplier_id, count(*) FROM `store_products` GROUP by supplier_id;
 
 # соответствия брендам
 SELECT * FROM `brands` B JOIN supplier_products SP ON B.name = SP.brand;
+
+# сводна таблица
+SELECT * FROM `store_products` SP LEFT JOIN variants V ON SP.id = V.product_id
+  LEFT JOIN brands B ON SP.brand_id = B.id
+ JOIN supplier_products SUP ON V.articleCode = SUP.articleCode
+#WHERE V.articleCode ='RSH-3375';
+WHERE SP.supplier_id = 9183;

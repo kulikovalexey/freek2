@@ -21,4 +21,9 @@ class StoreProduct extends Model
         $this->belongsTo('App\Brand', 'brand_id','id');
     }
 
+    public function suppliers()
+    {
+        $this->hasMany('App\SupplierProduct', 'supplier_id', 'supplier_id');
+    }
+
 }
