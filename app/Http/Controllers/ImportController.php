@@ -33,6 +33,8 @@ class ImportController extends Controller
 
         $supplierRepository = (new SupplierRepositoryFactory())->makeSupplierRepository($supplierData);
         $supplierRepository->saveLoadingData($data, $supplierData);
+
+        return redirect()->to('/');
     }
 
 
@@ -41,6 +43,8 @@ class ImportController extends Controller
         $brandsData = (new Brands())->getAll();
 
         (new BrandRepository())->saveBrands($brandsData);
+
+        return redirect()->to('/');
     }
 
     public function importStoreProducts()
@@ -53,6 +57,7 @@ class ImportController extends Controller
         $data = (new Variants())->getAll();
         (new VariantRepository())->saveLoadingData($data);
 
+        return redirect()->to('/');
     }
 
 
