@@ -18,16 +18,16 @@ class StoreProduct extends Model
 
     public function brand()
     {
-        $this->belongsTo('App\Brand', 'brand_id','id');
+        return $this->belongsTo('App\Brand', 'brand_id','id');
     }
 
     public function suppliers()
     {
-        $this->hasMany('App\SupplierProduct', 'supplier_id', 'supplier_id');
+        return $this->hasMany('App\SupplierProduct', 'supplier_id', 'supplier_id');
     }
 
     public function variant()
     {
-        $this->belongsTo('App\Variant', 'product_id', 'id');
+        return $this->belongsTo('App\Variant', 'product_id', 'id');
     }
 }

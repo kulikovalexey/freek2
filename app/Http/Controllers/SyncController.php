@@ -63,14 +63,15 @@ class SyncController extends Controller
 
     public function updateProduct(Request $request)  //remove test data
     {
-        $product = Variant::where('product_id', '=', 13254711)->get();
+//        $product = Variant::where('product_id', '=', 13254711)->get();
+        $newProductData = Variant::with('supplier')->find(20894911)->get();
 
 
 //        $product = StoreProduct::find($request->id)->get();
-        print_r($product->storeProduct);
+        print_r($newProductData);
         exit;
 
-        $resp = ShopApi::products()->update($product->id, [
+        $resp = ShopApi::products()->update($newProductData->id, [
             "title"         => "TEST_title_updated",
             "fulltitle"     => "TEST_fulltitle_updated",
             "description"   => "TEST_description_updated",

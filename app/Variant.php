@@ -17,6 +17,14 @@ class Variant extends Model
 
     public function storeProduct()
     {
-        $this->hasOne('StoreProduct', 'id','product_id');
+        return $this->hasOne('App\StoreProduct', 'id','product_id');  //:TODO not working
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function supplier()
+    {
+        return $this->hasOne('App\SupplierProduct', 'articleCode','articleCode');
     }
 }
