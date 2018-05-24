@@ -27,6 +27,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/store/brands', 'ImportController@importStoreBrands');
 
     Route::post('/create-product', 'SyncController@createProduct');
-    Route::put('/update-product', 'SyncController@updateProduct');
+    Route::put('/update-product/{id}', 'SyncController@updateProduct')->name('update.product');
     Route::delete('/delete-product', 'SyncController@deleteProduct');
 });

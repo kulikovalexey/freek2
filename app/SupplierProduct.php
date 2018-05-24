@@ -17,4 +17,9 @@ class SupplierProduct extends Model
 
     protected $fillable = ['sku', 'articleCode', 'ean', 'priceIncl', 'stockLevel', 'brand', 'name', 'yourPriceExVatEur', 'supplier_id'];
 
+//    public function product()
+//    {
+//        return $this->belongsTo('App\StoreProduct', 'supplier)
+//    }
+
 }

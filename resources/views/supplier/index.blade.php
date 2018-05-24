@@ -21,6 +21,7 @@
                         <table class="table table-striped">
                             <thead>
                             <tr>
+                                <th></th>
                                 <th>id</th>
                                 <th>sku</th>
                                 <th>ean</th>
@@ -33,6 +34,13 @@
                             <tbody>
                         @foreach($suppliers as $supplier)
                             <tr>
+                                <td>
+                                    <form action="{{ route('update.product', $supplier->id) }}" method="POST">
+                                        {{ method_field('PUT') }}
+                                        {{ csrf_field() }}
+                                        <button class="btn btn-update">update</button>
+                                    </form>
+                                </td>
                                 <td>{{ $supplier->id }}</td>
                                 <td>{{ $supplier->sku }}</td>
                                 <td>{{ $supplier->ean }}</td>

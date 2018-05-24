@@ -14,4 +14,9 @@ class Variant extends Model
         'id', 'articleCode', 'ean', 'sku', 'priceIncl',
         'stockLevel', 'product_id',
     ];
+
+    public function storeProduct()
+    {
+        $this->hasOne('StoreProduct', 'id','product_id');
+    }
 }

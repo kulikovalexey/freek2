@@ -26,4 +26,8 @@ class StoreProduct extends Model
         $this->hasMany('App\SupplierProduct', 'supplier_id', 'supplier_id');
     }
 
+    public function variant()
+    {
+        $this->belongsTo('App\Variant', 'product_id', 'id');
+    }
 }
