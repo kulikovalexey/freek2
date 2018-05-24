@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Classes\SupplierData\AbstractSupplierData;
 use App\Repository\BrandRepository;
+use App\SupplierProduct;
 
 abstract class AbstractRepository
 {
@@ -46,5 +47,15 @@ abstract class AbstractRepository
 
     protected function isInBrandList($brand){
         return (! in_array(strtolower($brand), $this->supplierData->brands));
+    }
+
+    protected function removeOldData($supplierData)
+    {
+        // remove old data
+        $oldData = SupplierProduct::where('supplier_id', $supplierData->id)->first();
+
+        if (isset($oldData->id)) {
+            SupplierProduct::where('supplier_id', $supplierData->id)->delete();
+        }
     }
 }

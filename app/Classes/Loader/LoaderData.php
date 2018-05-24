@@ -1,8 +1,9 @@
 <?php
+// :TODO create for big file
 
 namespace App\Classes\Parser;
 
-use App\Classes\SupplierData\AbstractSupplierData;
+//use App\Classes\Supplier\AbstractSupplierData;
 
 class LoaderData
 {

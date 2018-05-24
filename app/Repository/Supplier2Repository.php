@@ -9,6 +9,8 @@ class Supplier2Repository extends AbstractRepository
 
     public function saveLoadingData($data, $supplierData)
     {
+        $this->removeOldData($supplierData);
+
         $saveData = $data;
         foreach ($saveData as &$item) {
             if (! isset($item['ean']) && ! isset($item['sku'])) {

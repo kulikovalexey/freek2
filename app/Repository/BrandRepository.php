@@ -12,6 +12,8 @@ class BrandRepository
      */
     public function saveBrands($brandsData)
     {
+        Brand::truncate();
+
         foreach ($brandsData as $item){
 
             $brand = new Brand();

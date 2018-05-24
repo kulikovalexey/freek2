@@ -7,6 +7,8 @@ use PHPUnit\Runner\Exception;
 
 class StoreProductRepository
 {
+    const FIXED_PRICE = 'fixed_price'; // for update products
+
     public function saveLoadingData($data)
     {
         StoreProduct::truncate();

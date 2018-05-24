@@ -114,3 +114,14 @@ return [
         ]
     ],
 ];
+
+/**
+ * [product_id] => 207
+[brand] => Ubiquiti
+[product_code] => AM-2G15-120
+[ean] => 0810354020865
+[product_name] => AirMax Sector 2G15-120
+[stock] => 1
+[msrp] => 115
+[prijs] => 95.7
+ */
