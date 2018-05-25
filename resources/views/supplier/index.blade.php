@@ -37,8 +37,10 @@
                         @foreach($suppliers as $supplier)
                             <tr>
                                 <td>
-                                    <form action="{{ route('update.product', $supplier->articleCode) }}" method="POST">
+                                    <form action="{{ route('update.product') }}" method="POST">
                                         {{ method_field('PUT') }}
+                                        <input name="articleCode" type="hidden" value="{{ $supplier->articleCode }}">
+                                        {{--<input name="prodId" type="hidden" value="{{ $supplier->articleCode }}">--}}
                                         {{ csrf_field() }}
                                         <button class="btn btn-update">update</button>
                                     </form>
