@@ -22,7 +22,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/home/show/{supplier}', 'SupplierController@showSupplier')->where('supplier', 'supplier[0-9]+'); # :TODO rename
     //import from suppliers
 //    Route::get('/import/{supplier}', 'ImportController@importSupplierData')->where('supplier', 'supplier[0-9]+');
-    Route::get('/import2/{supplier}', 'ImportController@importSupplierData')->where('supplier', 'supplier[0-9]+');
     //import from store
     Route::get('/store/products', 'ImportController@importStoreProducts');
 //    Route::get('/store/brands', 'ImportController@importStoreBrands');
