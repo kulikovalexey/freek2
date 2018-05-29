@@ -11,8 +11,10 @@ class Supplier1Repository extends AbstractRepository
     {
        $this->removeOldData($supplierData);
 
-        foreach ($data as &$item){
-            if (empty($item['ean']) && empty($item['sku'])) continue;
+        $generator = $this->generator($data);
+
+        foreach ($generator as $item){
+            if (!isset($item['ean']) && !isset($item['sku'])) continue;
             $item['supplier_id'] = $supplierData->id;
             $item['priceIncl'] = $this->calculatePrice($item['priceIncl'], $item['brand']);
 
@@ -46,7 +48,7 @@ class Supplier1Repository extends AbstractRepository
     }
 
     protected function isInBrandList($brand){
-        return (! in_array(strtolower($brand), $this->supplierData->brands));
+        return in_array(strtolower($brand), $this->supplierData->brands);
     }
 
 }

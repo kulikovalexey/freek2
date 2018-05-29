@@ -14,7 +14,10 @@ class Supplier4Repository extends AbstractRepository
     {
         $this->removeOldData($supplierData);
 
-        foreach ($data as $item) {
+
+        $generator = $this->generator($data);
+
+        foreach ($generator as $item) {
             if (empty($item['ean']) && empty($item['sku'])) continue;
             if (!in_array(strtolower($item['brand']), $this->supplierData->brands)) continue;
 
@@ -22,6 +25,7 @@ class Supplier4Repository extends AbstractRepository
             SupplierProduct::create($item);
         }
     }
+
 
     /**
      *

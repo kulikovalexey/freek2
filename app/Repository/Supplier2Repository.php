@@ -11,24 +11,24 @@ class Supplier2Repository extends AbstractRepository
     {
         $this->removeOldData($supplierData);
 
-        $saveData = $data;
-        foreach ($saveData as &$item) {
+        $generator = $this->generator($data);
+        foreach ($generator as $item) {
             if (! isset($item['ean']) && ! isset($item['sku'])) {
-                unset($item);
                 continue;
             }
             if (!in_array(strtolower($item['brand']), $this->brands)) {
-                unset($item);
                 continue;
             }
             $item['priceIncl'] = $this->calculatePrice($item['priceIncl']);
-        }
 
-        foreach ($data as $item) {
             $item['supplier_id'] = $supplierData->id;
             SupplierProduct::create($item);
         }
     }
+
+
+
+
 
     /**
      * @return string

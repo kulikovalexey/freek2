@@ -9,6 +9,7 @@ class ParserCSV implements ParserInterface
     public function parse(AbstractSupplierData $supplierData){
 
         if ($supplierData->_name == 'supplier3') $this->createHeader($supplierData);  //:TODO refactoring
+
         $filePath = $this->setFilePath($supplierData->fileName);
 
         $csv = new \ParseCsv\Csv();

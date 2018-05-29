@@ -58,4 +58,12 @@ abstract class AbstractRepository
             SupplierProduct::where('supplier_id', $supplierData->id)->delete();
         }
     }
+
+
+    protected function generator($data)
+    {
+        foreach ($data as $item) {
+            yield $item;
+        }
+    }
 }
