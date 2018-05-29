@@ -20,15 +20,25 @@ use ShopApi;
 
 class SyncController extends Controller
 {
-    // выбрать все данные
-    public function index()
+    public function sync(Request $request)
     {
+        $dataForUpdate = Variant::where('articleCode', '=', $request->articleCode)->get()->toArray();
+
+        if(!isset($dataForUpdate[0]['product_id'])) {
+
+            return $this->createProduct($request);
+
+        } else {
+
+            return $this->updateProduct($request);
+
+        }
 
     }
 
-
-    public function createProduct($data, $supplierData, $brandId) // :TODO rebase all to repositories
+    public function createProduct(Request $request) // :TODO rebase all to repositories
     {
+        echo 'created (blocked)'; exit;
         // :TODO here data new supplier product
 
         $resp = ShopApi::products()->create([
@@ -47,66 +57,20 @@ class SyncController extends Controller
         return $resp;
     }
 
-
-    public function sync(Request $request)
+    public function updateProduct(Request $request)  //remove test data
     {
+        echo 'updated (blocked)'; exit;
         $dataForUpdate = Variant::where('articleCode', '=', $request->articleCode)->get()->toArray();
 
 
         if(!isset($dataForUpdate[0]['product_id'])) {
-
-            $this->createProduct();
-
-        } else {
-
-            $this->updateProduct();
-
-        }
-
-    }
-
-
-    public function createVariant($data)  //:TODO prepare data
-    {
-        $resp = ShopApi::variants()->create([
-                "articleCode"     => $data->articleCode,
-                "ean"             => $data->ean,
-                "sku"             => $data->sku,
-                "priceIncl"       => $data->priceIncl,
-                "stockLevel"      => $data->stockLevel,
-                "product"      => [],
-        ]);
-        return $resp;
-    }
-
-
-    public function updateProduct(Request $request)  //remove test data
-    {
-//        validate articleCode supplier_id
-
-        $dataForUpdate = Variant::where('articleCode', '=', $request->articleCode)->get()->toArray();
-
-
-        if(!isset($dataForUpdate[0]['product_id'])) {//:TODO rebase to methods
-            echo 'added new product'; exit;   $this->createProduct($data);
-        } else {
-            echo 'updated product'; exit;  $this->updateProduct($data);
+            echo 'new product'; exit;
         }
 
         $isStaticPrice = StoreProduct::findOrFail(13359801);  //for check static price
         print_r($isStaticPrice);
         exit;
         print_r($isStaticPrice);
-
-
-//        if(){
-//
-//        }
-
-
-
-
-
 
         exit;
         $resp = ShopApi::products()->update($newProductData->id, [
@@ -116,6 +80,19 @@ class SyncController extends Controller
             "content"       => "TEST_CONTENT_updated",
         ]);
 
+        return $resp;
+    }
+
+    protected function createVariant($data)  //:TODO prepare data
+    {
+        $resp = ShopApi::variants()->create([
+            "articleCode"     => $data->articleCode,
+            "ean"             => $data->ean,
+            "sku"             => $data->sku,
+            "priceIncl"       => $data->priceIncl,
+            "stockLevel"      => $data->stockLevel,
+            "product"      => [],
+        ]);
         return $resp;
     }
 

@@ -39,6 +39,8 @@
                                 <td>
                                     <form action="{{ route('update.product') }}" method="POST">
                                         {{ method_field('PUT') }}
+                                        <input name="articleCode" type="hidden" value="{{ $supplier->articleCode }}">
+                                        {{--<input name="prodId" type="hidden" value="{{ $supplier->articleCode }}">--}}
                                         {{ csrf_field() }}
                                         <input type="hidden" name="articleCode" value="{{ $supplier->articleCode }}">
                                         <input type="hidden" name="supplier_id" value="{{ $suppliers[0]->supplier_id }}">
