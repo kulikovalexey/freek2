@@ -75,7 +75,8 @@ return [
             'name', //       => '2',
             'priceIncl', // => '4',
             'stockLevel', // => '5',
-            'skip',  // ====
+            'skip',
+            'skip', // ====
             'articleCode',// => '7',
 //            'ean'         => '',
             'skip',        // => '8',

@@ -42,28 +42,4 @@ class Supplier4Repository extends AbstractRepository
         }
 
     }
-
-
-/*
-
-
-
-
-if(!isset($item->product_code) && !isset($item->ean) ) continue;
-
-$product = new SupplierProduct();
-
-
-$product->sku = $item->product_code;
-$product->articleCode = $item->product_id;
-$product->ean = $item->ean;
-$product->priceIncl = (float)$item->prijs;
-$product->stockLevel = $item->stock;
-$product->brand = $item->brand;
-$product->name = $item->product_name;
-$product->supplier_id = $supplierData->id;
-
-$product->save();
-}*/
-
 }

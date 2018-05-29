@@ -1,3 +1,6 @@
+brand;sku;name;priceIncl;stockLevel;skip;skip;articleCode;skip;skip
+brand;sku;name;priceIncl;stockLevel;skip;skip;articleCode;skip;skip
+brand;sku;name;priceIncl;stockLevel;skip;skip;articleCode;skip;skip
 ZyXEL;91-005-054005;ZyXEL ZyAIR G-162;0;3.96;10;;ZYG162NG;WICLPCMI;Wireless Clients PCMIA
 SPLITTER;3100009021;Splitter ISDN PF135IA;0;4.8;14111;;SPPF1351A;SPLITISD;Splitters ADSL annex B (ISDN)
 VALADIS;GREENBOW VPN;TheGreenBow IPSec VPN Client;0;35.75;29;;GRVPNCLIENT;SECLIIPS;Firewall IP SEC Licenties
@@ -814,7 +817,4 @@ JABRA;9556-583-111;Jabra Engage 75 Mono (9556-583-111);0;241.8;2;;JAENGAGE75MONO
 JABRA;9559-583-111;Jabra Engage 75 Stereo (9559-583-111);0;254.56;2;;JAENGAGE75STEREO;TEHEDRAA;Telecom Headsets Draadloos
 JABRA;9555-583-111;Jabra Engage 75 Convertible (9555-583-111);0;254.56;2;;JAENGAGE75CONV;TEHEDRAA;Telecom Headsets Draadloos
 YEALINK;W60P;Yealink W60P t/m 31 mei introductiekorting;0;86.42;20;;YEW60P;TEDEYE;Telecom DECT Yealink
-brand,sku,name,priceIncl,stockLevel,skip,articleCode,skip,skip
-brand,sku,name,priceIncl,stockLevel,skip,articleCode,skip,skip
-brand,sku,name,priceIncl,stockLevel,skip,articleCode,skip,skip
-brand,sku,name,priceIncl,stockLevel,skip,articleCode,skip,skip
+

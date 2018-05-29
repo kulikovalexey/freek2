@@ -8,7 +8,7 @@ class ParserCSV implements ParserInterface
 {
     public function parse(AbstractSupplierData $supplierData){
 
-        if ($supplierData->_name == 'supplier3') $this->createHeader($supplierData);  //:TODO refactoring
+        if ($supplierData->_name == 'supplier3') $this->createHeader($supplierData);  //:TODO refactoring if not have a header
 
         $filePath = $this->setFilePath($supplierData->fileName);
 
@@ -28,7 +28,7 @@ class ParserCSV implements ParserInterface
         $csv->parse($filePath);
 
 
-        if ($supplierData->_name != 'supplier3') {
+        if ($supplierData->_name != 'supplier3') {  // :TODO
 
             $arrColumns = $supplierData->dataProducts;
             $columnsList = array_values($arrColumns);
@@ -54,8 +54,6 @@ class ParserCSV implements ParserInterface
             });
         }
 
-//        print_r($csv->data);
-//        exit;
         return $csv->data;
 
     }
@@ -80,16 +78,13 @@ class ParserCSV implements ParserInterface
         return false;
     }
 
-    protected function createHeader($supplierData)
+    protected function createHeader(AbstractSupplierData $supplierData)
     {
         $filePath = $this->setFilePath($supplierData->fileName);
 
-        $handle = fopen($filePath, 'a');
+        $header = implode($supplierData->delimiter, $supplierData->dataProducts);
 
-        fputcsv($handle, $supplierData->dataProducts);
-
-        fclose($handle);
-
+        file_put_contents($filePath, $header . "\r\n" . file_get_contents($filePath));
     }
 
 }

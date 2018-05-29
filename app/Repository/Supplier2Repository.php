@@ -19,16 +19,16 @@ class Supplier2Repository extends AbstractRepository
             if (!in_array(strtolower($item['brand']), $this->brands)) {
                 continue;
             }
+            if ($item['priceIncl'] == 99999.99) {
+                continue;
+            }
+
             $item['priceIncl'] = $this->calculatePrice($item['priceIncl']);
 
             $item['supplier_id'] = $supplierData->id;
             SupplierProduct::create($item);
         }
     }
-
-
-
-
 
     /**
      * @return string
@@ -46,17 +46,14 @@ class Supplier2Repository extends AbstractRepository
      */
     protected function calculatePrice($price, $brands = null)
     {
-        if ($price == 99999.99){
-            return $price;
-
-        } elseif (($price * 1.03 + 7.50) * 1.21 >= 50) {
+       if (($price * 1.03 + 7.50) * 1.21 >= 50) {
 
             return floor(($price * 1.03 + 7.50) * 1.21);
 
-        } else {
+       } else {
 
             return (floor( $price * 1.03 + 7.50) * 1.21 * 2) / 2;
 
-        }
+       }
     }
 }
