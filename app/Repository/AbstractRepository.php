@@ -69,6 +69,6 @@ abstract class AbstractRepository
 
     protected function roundPriceDown($price)
     {
-        return round ($price, 0, PHP_ROUND_HALF_DOWN);
+        return floor($price);
     }
 }
