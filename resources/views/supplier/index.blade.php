@@ -32,6 +32,7 @@
                                 <th>stockLevel (new)</th>
                                 <th>priceIncl (old)</th>
                                 <th>priceIncl (new)</th>
+                                <th>priceIncl (origin)</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -63,6 +64,7 @@
                                     <td>{{ $supplier->stockLevel }}</td>
                                     <td>{{ $supplier->variant['priceIncl'] }}</td>
                                     <td>{{ $supplier->priceIncl }}</td>
+                                    <td>{{ $supplier->priceIncl_origin }}</td>
                                 </tr>
                             @endforeach
                             </tbody>

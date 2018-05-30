@@ -21,7 +21,10 @@ class Supplier4Repository extends AbstractRepository
             if (empty($item['ean']) && empty($item['sku'])) continue;
             if (!in_array(strtolower($item['brand']), $this->supplierData->brands)) continue;
 
-            $item['priceIncl'] = $this->calculatePrice($item['priceIncl']);
+            $item['priceIncl_origin'] = $item['priceIncl'];
+            $item['priceIncl']   = $this->calculatePrice($item['priceIncl']);
+            $item['supplier_id'] = $supplierData->id;
+
             SupplierProduct::create($item);
         }
     }

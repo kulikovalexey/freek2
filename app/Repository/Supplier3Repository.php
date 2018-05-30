@@ -44,9 +44,10 @@ class Supplier3Repository extends AbstractRepository
                 continue;
             }
 
-            $item['priceIncl'] = $this->calculatePrice($item['priceIncl']);
+            $item['priceIncl_origin'] = $item['priceIncl'];
+            $item['priceIncl']        = $this->calculatePrice($item['priceIncl']);
+            $item['supplier_id']      = $supplierData->id;
 
-            $item['supplier_id'] = $supplierData->id;
             SupplierProduct::create($item);
         }
 
