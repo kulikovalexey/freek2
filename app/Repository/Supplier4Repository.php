@@ -34,7 +34,7 @@ class Supplier4Repository extends AbstractRepository
      * @param $price
      * @return float
      */
-    protected function calculatePrice($price)
+    protected function calculatePrice($price, $brand = null, $yourPriceExVatEur = null)
     {
         return $this->roundPriceDown(($price * 1.02 + 7.50) * 1.21);
     }

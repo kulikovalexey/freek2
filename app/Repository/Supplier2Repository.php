@@ -66,7 +66,7 @@ class Supplier2Repository extends AbstractRepository
      * priceIncl should be:
      * (price + 3% + 7,50) + 21%. For every brand I use.
      */
-    protected function calculatePrice($price)
+    protected function calculatePrice($price, $brand = null, $yourPriceExVatEur = null)
     {
         return $this->roundPriceDown(($price * 1.03 + 7.50) * 1.21);
     }

@@ -32,9 +32,7 @@ abstract class AbstractRepository
      * @param null $brand
      * @param null $yourPriceExVatEur
      */
-    protected function calculatePrice($price, $brand = null, $yourPriceExVatEur = null){
-
-    }
+    abstract protected function calculatePrice($price, $brand, $yourPriceExVatEur);
 
     /**
      * AbstractRepository constructor.
