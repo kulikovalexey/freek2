@@ -15,7 +15,7 @@ class SupplierProduct extends Model
 
     protected $table = 'supplier_products';
 
-    protected $fillable = ['sku', 'articleCode', 'ean', 'priceIncl', 'stockLevel', 'brand', 'name', 'yourPriceExVatEur', 'supplier_id'];
+    protected $fillable = ['sku', 'articleCode', 'ean', 'priceIncl', 'stockLevel', 'brand', 'name', 'yourPriceExVatEur', 'supplier_id', 'priceIncl_origin'];
 
     public function variant()
     {

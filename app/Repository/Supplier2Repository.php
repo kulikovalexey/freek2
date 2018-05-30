@@ -64,18 +64,10 @@ class Supplier2Repository extends AbstractRepository
      * @return float
      *
      * priceIncl should be:
-     * price + 3% + 7,50 + 21%. For every brand I use.
+     * (price + 3% + 7,50) + 21%. For every brand I use.
      */
     protected function calculatePrice($price, $brands = null)
     {
-        if (($price * 1.03 + 7.50) * 1.21 >= 50) {
-
-            return $this->roundPriceDown(($price * 1.03 + 7.50) * 1.21);
-
-        } else {
-
-            return (floor($price * 1.03 + 7.50) * 1.21 * 2) / 2;
-
-        }
+        return $this->roundPriceDown(($price * 1.03 + 7.50) * 1.21);
     }
 }

@@ -15,6 +15,7 @@ class Supplier1Repository extends AbstractRepository
 
         foreach ($generator as $item){
             if (!isset($item['ean']) && !isset($item['sku'])) continue;
+
             $item['priceIncl_origin'] = $item['priceIncl'];
             $item['priceIncl']        = $this->calculatePrice($item['priceIncl'], $item['brand']);
             $item['supplier_id']      = $supplierData->id;

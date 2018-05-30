@@ -60,15 +60,7 @@ class Supplier3Repository extends AbstractRepository
      */
     protected function calculatePrice($price, $brands = null)
     {
-        if (($price * 1.02 + 7.50) * 1.21 >= 50){
-
-            return floor(($price * 1.02 + 7.50) * 1.21);
-
-        } else {
-
-            return floor(($price * 1.02 + 7.50) * 1.21 * 2) / 2;
-
-        }
+        return $this->roundPriceDown(($price * 1.03 + 7.50) * 1.21);
     }
 
 
