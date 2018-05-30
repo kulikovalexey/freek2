@@ -16,7 +16,7 @@ class Supplier2Repository extends AbstractRepository
             if (!isset($item['ean']) && !isset($item['sku'])) {
                 continue;
             }
-            if (!in_array(strtolower($item['brand']), $this->brands)) {
+            if (!in_array(strtolower($item['brand']), $this->supplierData->brands)) {
                 continue;
             }
             if ($item['priceIncl'] == 99999.99) {

@@ -18,8 +18,6 @@ abstract class AbstractRepository
      */
     protected $supplierProducts;
 
-    protected $brands;
-
 
     /**
      * @param $data
@@ -41,7 +39,6 @@ abstract class AbstractRepository
     public function __construct(AbstractSupplierData $supplierData)
     {
         $this->supplierData = $supplierData;
-        $this->brands = BrandRepository::getBrandNameList();
     }
 
     protected function isInBrandList($brand){

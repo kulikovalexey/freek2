@@ -40,7 +40,7 @@ class Supplier3Repository extends AbstractRepository
             if (!isset($item['ean']) && !isset($item['sku'])) {
                 continue;
             }
-            if (!in_array(strtolower($item['brand']), $this->brands)) {
+            if (!in_array(strtolower($item['brand']), $this->supplierData->brands)) {
                 continue;
             }
 
