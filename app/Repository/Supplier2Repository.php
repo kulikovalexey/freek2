@@ -58,15 +58,15 @@ class Supplier2Repository extends AbstractRepository
 //       }
 //    }
 
-    /** after review
+    /**
+     * after review
      * @param $price
-     * @param null $brands
      * @return float
      *
      * priceIncl should be:
      * (price + 3% + 7,50) + 21%. For every brand I use.
      */
-    protected function calculatePrice($price, $brands = null)
+    protected function calculatePrice($price)
     {
         return $this->roundPriceDown(($price * 1.03 + 7.50) * 1.21);
     }

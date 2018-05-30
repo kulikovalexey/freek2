@@ -55,12 +55,11 @@ class Supplier3Repository extends AbstractRepository
 
     /**
      * @param $price
-     * @param null $brands
-     * @return float|int
+     * @return float
      */
-    protected function calculatePrice($price, $brands = null)
+    protected function calculatePrice($price)
     {
-        return $this->roundPriceDown(($price * 1.03 + 7.50) * 1.21);
+        return $this->roundPriceDown(($price * 1.02 + 7.50) * 1.21);
     }
 
 

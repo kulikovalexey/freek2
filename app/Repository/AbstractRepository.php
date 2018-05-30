@@ -30,8 +30,9 @@ abstract class AbstractRepository
     /**
      * @param $price
      * @param null $brand
+     * @param null $yourPriceExVatEur
      */
-    protected function calculatePrice($price, $brand){
+    protected function calculatePrice($price, $brand = null, $yourPriceExVatEur = null){
 
     }
 
@@ -69,6 +70,6 @@ abstract class AbstractRepository
 
     protected function roundPriceDown($price)
     {
-        return round ($price, 0, PHP_ROUND_HALF_DOWN);
+        return floor($price);
     }
 }

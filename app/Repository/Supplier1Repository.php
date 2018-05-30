@@ -17,7 +17,7 @@ class Supplier1Repository extends AbstractRepository
             if (!isset($item['ean']) && !isset($item['sku'])) continue;
 
             $item['priceIncl_origin'] = $item['priceIncl'];
-            $item['priceIncl']        = $this->calculatePrice($item['priceIncl'], $item['brand']);
+            $item['priceIncl']        = $this->calculatePrice($item['priceIncl'], $item['brand'], $item['yourPriceExVatEur']);
             $item['supplier_id']      = $supplierData->id;
 
             SupplierProduct::create($item);
@@ -46,20 +46,19 @@ class Supplier1Repository extends AbstractRepository
 //    }
 
 
-    /** after review
-     * @param $price
-     * @return boolFor
+    /**
+     * after review
      * the brands synology, g-technology, hikvision, foscam, asustor the priceIncl should be:
      * SRP price ex. VAT EUR + 21% VAT
      * For every other brand the priceIncl should be
      * If 'Your price ex. VAT EUR" = 250 or more then "Your price ex. VAT EUR" +2%+21% VAT
      * If Your price ex. VAT EUR" = less then 250 then SRP price ex. VAT EUR + 21% VAT
-     *
      * @param $price
-     * @param $brand
-     * @return float|int
+     * @param null $brand
+     * @param $yourPriceExVatEur
+     * @return float
      */
-    protected function calculatePrice($price, $brand)
+    protected function calculatePrice($price, $brand, $yourPriceExVatEur)
     {
         if ($this->isInBrandList($brand)){
 
@@ -67,7 +66,7 @@ class Supplier1Repository extends AbstractRepository
 
         } elseif ($this->isPriceMoreThan250($price)){
 
-            return $this->roundPriceDown($price * 1.23);  //$price * (1 + 0.02 + 0.21)
+            return $this->roundPriceDown($yourPriceExVatEur * 1.23);  //$price * (1 + 0.02 + 0.21)
 
         } else {
 
