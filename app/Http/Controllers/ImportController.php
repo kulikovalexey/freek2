@@ -28,7 +28,7 @@ class ImportController extends Controller
             $this->getConfigSuppliers($supplier)
         );
 
-     //   (new Loader())->downloadFile($supplierData); // :TODO uncomment
+//        (new Loader())->downloadFile($supplierData); // :TODO uncomment
         $data = (new Parser())->parse($supplierData);
 
         $supplierRepository = (new SupplierRepositoryFactory())->makeSupplierRepository($supplierData);

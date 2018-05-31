@@ -73,14 +73,14 @@ return [
             'brand',
             'sku',//         => '1',
             'name', //       => '2',
+            'skip',
             'priceIncl', // => '4',
             'stockLevel', // => '5',
             'skip',
-            'skip', // ====
             'articleCode',// => '7',
 //            'ean'         => '',
             'skip',        // => '8',
-            'skip',        // => '9',
+            'skip',
 
         ],
         'brands' => [
