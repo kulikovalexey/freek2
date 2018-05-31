@@ -39,25 +39,6 @@ class Supplier2Repository extends AbstractRepository
         return Supplier2Product::truncate();
     }
 
-
-//    /**before review
-//     * @param $price
-//     * @param null $brands
-//     * @return float
-//     */
-//    protected function calculatePrice($price, $brands = null)
-//    {
-//       if (($price * 1.03 + 7.50) * 1.21 >= 50) {
-//
-//            return floor(($price * 1.03 + 7.50) * 1.21);
-//
-//       } else {
-//
-//            return (floor( $price * 1.03 + 7.50) * 1.21 * 2) / 2;
-//
-//       }
-//    }
-
     /**
      * after review
      * @param $price

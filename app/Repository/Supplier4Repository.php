@@ -14,7 +14,6 @@ class Supplier4Repository extends AbstractRepository
     {
         $this->removeOldData($supplierData);
 
-
         $generator = $this->generator($data);
 
         foreach ($generator as $item) {
