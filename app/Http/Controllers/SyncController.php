@@ -24,6 +24,10 @@ class SyncController extends Controller
     {
         $dataForUpdate = Variant::where('articleCode', '=', $request->articleCode)->get()->toArray();
 
+        print_r($dataForUpdate);
+        exit;
+
+
         if(!isset($dataForUpdate[0]['product_id'])) {
 
             return $this->createProduct($request);

@@ -44,7 +44,7 @@ class Supplier1Repository extends AbstractRepository
 
         } elseif ($this->isPriceMoreThan250($price)){
 
-            return $this->roundPriceDown($yourPriceExVatEur * 1.23);  //$price * (1 + 0.02 + 0.21)
+            return $this->roundPriceDown($yourPriceExVatEur * 1.02 * 1.21);
 
         } else {
 
