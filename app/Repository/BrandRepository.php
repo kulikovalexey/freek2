@@ -8,6 +8,7 @@ class BrandRepository
 {
 
     /**
+     * saving  a list of brand names
      * @param $brandsData
      */
     public function saveBrands($brandsData)
@@ -23,6 +24,10 @@ class BrandRepository
         }
     }
 
+    /**
+     * getting a list of brand names
+     * @return array
+     */
     public static function getBrandNameList()
     {
         $arr = Brand::pluck('name')->toArray();

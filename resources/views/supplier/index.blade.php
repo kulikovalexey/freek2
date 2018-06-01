@@ -39,8 +39,7 @@
                             @foreach($suppliers as $supplier)
                                 <tr>
                                     <td>
-                                        <form action="{{ route('update.product') }}" method="POST">
-                                            {{ method_field('PUT') }}
+                                        <form action="{{ route('sync.product') }}" method="POST">
                                             <input name="articleCode" type="hidden"
                                                    value="{{ $supplier->articleCode }}">
                                             {{--<input name="prodId" type="hidden" value="{{ $supplier->articleCode }}">--}}

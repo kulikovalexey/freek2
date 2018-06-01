@@ -22,7 +22,13 @@ class ImportController extends Controller
     protected $suppliers;
     protected $args;
 
-    public function importSupplierData(Request $request, $supplier)
+    /**
+     * import suppliers products
+     * @param Request $request
+     * @param $supplier
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function importSupplierProducts(Request $request, $supplier)
     {
         $supplierData = new SupplierData(
             $this->getConfigSuppliers($supplier)
@@ -38,6 +44,10 @@ class ImportController extends Controller
     }
 
 
+    /**
+     * import brands from store
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function importStoreBrands()
     {
         $brandsData = (new Brands())->getAll();
@@ -47,6 +57,10 @@ class ImportController extends Controller
         return redirect()->to('/');
     }
 
+    /**
+     * import products from store
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function importStoreProducts()
     {
         // api
@@ -60,9 +74,11 @@ class ImportController extends Controller
         return redirect()->to('/');
     }
 
-
-
-
+    /**
+     * get configuration data of supplier
+     * @param $supplier
+     * @return \Illuminate\Config\Repository|mixed
+     */
     protected function getConfigSuppliers($supplier)
     {
         return config("suppliers.{$supplier}");

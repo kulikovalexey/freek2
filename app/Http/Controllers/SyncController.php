@@ -22,6 +22,7 @@ class SyncController extends Controller
 {
     public function sync(Request $request)
     {
+        //:TODO сюда перенести данные для товара который новый. код поставщика и articleCode
         $dataForUpdate = Variant::where('articleCode', '=', $request->articleCode)->get()->toArray();
 
         print_r($dataForUpdate);
@@ -30,7 +31,14 @@ class SyncController extends Controller
 
         if(!isset($dataForUpdate[0]['product_id'])) {
 
-            return $this->createProduct($request);
+            // создаем продукт/ получаем в ответе id
+            // создаем variant
+
+
+
+            $resp = $this->createProduct($request);
+            $resp = $this->createVariant($data, $productId);
+//             return
 
         } else {
 
@@ -87,7 +95,7 @@ class SyncController extends Controller
         return $resp;
     }
 
-    protected function createVariant($data)  //:TODO prepare data
+    protected function createVariant($data, $productId)  //:TODO prepare data
     {
         $resp = ShopApi::variants()->create([
             "articleCode"     => $data->articleCode,
