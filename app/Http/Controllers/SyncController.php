@@ -2,111 +2,157 @@
 
 namespace App\Http\Controllers;
 
+use App\Brand;
 use App\Classes\StoreData\Products;
 use App\StoreProduct;
 use App\Variant;
 use Illuminate\Http\Request;
 use App\SupplierProduct;
-//use App\Classes\StoreData\Brands;
-//use App\Classes\SupplierData\SupplierData;
-//use App\Classes\Parser\Parser;
-//use App\Classes\StoreData\Products;
-//use App\Classes\StoreData\Variants;
-//use App\Repository\SupplierRepositoryFactory;
-//use App\Repository\StoreProductRepository;
-//use App\Repository\VariantRepository;
-//use App\Repository\BrandRepository;
+
 use ShopApi;
+use Illuminate\Support\Facades\Session;
 
 class SyncController extends Controller
 {
     public function sync(Request $request)
     {
-        //:TODO сюда перенести данные для товара который новый. код поставщика и articleCode
-        $dataForUpdate = Variant::where('articleCode', '=', $request->articleCode)->get()->toArray();
+//        $this->clearTrash(72868535);
+//        $this->clearTrash(72857900);
+//        exit;
+//
+        $articleCode = $request->articleCode;
+        $supplierId = $request->supplierId;
 
-        print_r($dataForUpdate);
-        exit;
+        $dataForUpdate = Variant::where('articleCode', '=', $articleCode)  //:TODO rename/ проверяю наличие старых variant
+            ->get()
+            ->toArray();
 
+        $productData = SupplierProduct::where('supplier_id', '=', $supplierId)  // :TODO вытягиваю новые данные из файла поставщика
+            ->where('articleCode', '=', $articleCode)
+            ->get([
+                'id',
+                'brand',
+                'name',
+                'articleCode',
+                'ean',
+                'sku',
+                'priceIncl',
+                'stockLevel',
+            ]);
 
-        if(!isset($dataForUpdate[0]['product_id'])) {
+        $brandId = Brand::where('name', '=', $productData[0]['brand'])->first();
 
-            // создаем продукт/ получаем в ответе id
-            // создаем variant
+        if(isset($dataForUpdate[0]['product_id'])) {
+            //update
+            $resp = $this->updateProduct($dataForUpdate[0]);
 
-
-
-            $resp = $this->createProduct($request);
-            $resp = $this->createVariant($data, $productId);
-//             return
+            return \Redirect::back()->withErrors(['Product was updated']);
 
         } else {
+            //create
+            $resp = $this->createProduct($productData[0], $supplierId, $brandId->id);
+            $this->saveNewProductData($resp, $brandId->id, $supplierId);
 
-            return $this->updateProduct($request);
+            $variantId = $this->getIdForNewVariant($resp['id']);
 
+            $resp = $this->updateVariant($productData[0], $variantId);
+
+            return \Redirect::back()->withErrors(['Product was created']);
         }
 
     }
 
-    public function createProduct(Request $request) // :TODO rebase all to repositories
-    {
-        echo 'created (blocked)'; exit;
-        // :TODO here data new supplier product
 
-        $resp = ShopApi::products()->create([
-            "visibility"    => "hidden",   // for new hidden?
-            "title"         => $data->title,  // name supplier product
-            "data01"        => $data->brand,
+
+    /**
+     * creating product
+     * @param $productData
+     * @param $supplierId
+     * @return array
+     */
+    public function createProduct($productData, $supplierId, $brandId)
+    {
+       $resp = ShopApi::products()->create([
+            "visibility"    => "hidden",
+            "title"         => $productData['name'],
+            "data01"        => $productData['brand'],
 //            "data02"        => "",
 //            "data03"        => "",
-            "fulltitle"     => $data->title,  // name supplier product
+            "fulltitle"     => $productData['brand'],
             "description"   => "",
             "content"       => "",
-            "supplier"      => $supplierData->id,  // id supplier
-            "brand"         => $brandId   // id brand
+            "supplier"      => $supplierId,
+            "brand"         => $brandId,
         ]);
 
         return $resp;
     }
 
-    public function updateProduct(Request $request)  //remove test data
+    /**
+     * updating product
+     * @param $productData
+     * @return array
+     */
+    public function updateProduct($productData)  //remove test data
     {
-        echo 'updated (blocked)'; exit;
-        $dataForUpdate = Variant::where('articleCode', '=', $request->articleCode)->get()->toArray();
+        // only variant
+        $variantId = $productData['id'];  //:TODO рефакторить
 
+        $data = [
+//            "articleCode"   => $productData['articleCode'],
+//            "ean"           => $productData['ean'],
+//            "sku"           => $productData['sku'],
+            "priceIncl"     => $productData['priceIncl'],
+            "stockLevel"    => $productData['stockLevel'],
+            "product"       => $productData['product_id'],   //:TODO тут product_id в базе все данные есть. зачем тогда?
+        ];
 
-        if(!isset($dataForUpdate[0]['product_id'])) {
-            echo 'new product'; exit;
+        if ($this->isFixedPrice($productData['product_id'])){
+            unset($data['priceIncl']);
+        } else {
+            echo 'принимаем новое значение';
         }
 
-        $isStaticPrice = StoreProduct::findOrFail(13359801);  //for check static price
-        print_r($isStaticPrice);
-        exit;
-        print_r($isStaticPrice);
-
-        exit;
-        $resp = ShopApi::products()->update($newProductData->id, [
-            "title"         => "TEST_title_updated",
-            "fulltitle"     => "TEST_fulltitle_updated",
-            "description"   => "TEST_description_updated",
-            "content"       => "TEST_CONTENT_updated",
-        ]);
+        $resp = ShopApi::variants()->update($variantId, $data); //:TODO переделать на универсальное
 
         return $resp;
     }
 
-    protected function createVariant($data, $productId)  //:TODO prepare data
+    /**
+     * create new variant
+     * @param $productId
+     * @return mixed
+     */
+    protected function getIdForNewVariant($productId)
     {
-        $resp = ShopApi::variants()->create([
-            "articleCode"     => $data->articleCode,
-            "ean"             => $data->ean,
-            "sku"             => $data->sku,
-            "priceIncl"       => $data->priceIncl,
-            "stockLevel"      => $data->stockLevel,
-            "product"      => [],
+        $newVariant = ShopApi::variants()->get(null, [
+            'product' => $productId,
+            'fields' => "id"
         ]);
+
+       return $newVariant[0]['id'];
+    }
+
+    /**
+     * update variant
+     * @param $data
+     * @param $variantId
+     * @return array
+     */
+    protected function updateVariant($data, $variantId)
+    {
+        $resp = ShopApi::variants()->update($variantId, [
+            "articleCode"   => $data->articleCode,
+            "ean"           => $data->ean,
+            "sku"           => $data->sku,
+            "priceIncl"     => $data->priceIncl,
+            "stockLevel"    => $data->stockLevel,
+            "product"       => [],   //:TODO тут product_id в базе все данные есть. зачем тогда?
+        ]);
+
         return $resp;
     }
+
 
     /**
      * delete product
@@ -132,4 +178,53 @@ class SyncController extends Controller
         return config("suppliers.{$supplier}");
     }
 
+
+
+    protected function saveNewProductData($resp, $brandId, $supplierId)
+    {
+        $data = [
+            'id'         =>  $resp['id'],
+            'name'       =>  $resp['title'],
+            'data01'     =>  $resp['data01'],
+            'data02'     =>  $resp['data02'],
+            'data03'     =>  $resp['data03'],
+            'brand_id'   =>  $brandId,
+            'supplier_id'=>  $supplierId,
+//            'priceExcl'  =>  $resp['priceExcl'], :TODO перепроверить
+        ];
+
+        return StoreProduct::insert($data);
+    }
+
+
+    protected function saveNewVariantData($resp)
+    {
+        $data = [
+            'id'         =>  $resp['id'],
+            'articleCode'       =>  $resp['articleCode'],
+            'ean'     =>  $resp['ean'],
+            'sku'     =>  $resp['sku'],
+            'priceIncl'     =>  $resp['priceIncl'],
+            'stockLevel'    =>  $resp['stockLevel'],
+            'product_id'    =>  $resp['product_id'],
+        ];
+
+        return Variant::insert($data);
+    }
+
+
+    protected function clearTrash($id)
+    {
+        // удалить продукт
+        $resp = ShopApi::products()->delete($id);
+        print_r($resp);
+    }
+
+
+    protected function isFixedPrice($productId)
+    {
+        $isFixedPrice = StoreProduct::find($productId);
+
+        return $isFixedPrice->data02;
+    }
 }

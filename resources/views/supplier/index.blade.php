@@ -8,6 +8,10 @@
                     <div class="panel-heading">
                         Supplier {{  $suppliers[0]->supplier_id  }}</div> {{-- :TODO переименовать --}}
 
+                    @if($errors->any())
+                        <h4 style="color:green">{{$errors->first()}}</h4>
+                    @endif
+
 
                     <div class="panel-body">
                         @if (session('status'))
@@ -42,7 +46,7 @@
                                         <form action="{{ route('sync.product') }}" method="POST">
                                             <input name="articleCode" type="hidden"
                                                    value="{{ $supplier->articleCode }}">
-                                            {{--<input name="prodId" type="hidden" value="{{ $supplier->articleCode }}">--}}
+                                            <input name="supplierId" type="hidden" value="{{ $suppliers[0]->supplier_id }}">
                                             {{ csrf_field() }}
                                             <input type="hidden" name="articleCode"
                                                    value="{{ $supplier->articleCode }}">
