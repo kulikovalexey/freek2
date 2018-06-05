@@ -57,7 +57,7 @@
                                     </td>
 
 
-                                    <td>{{ ( isset ($supplier->variant['articleCode'])) ? $supplier->articleCode : $supplier->articleCode . ' new'  }}</td>
+                                    <td>{!! ( isset ($supplier->variant['articleCode'])) ? $supplier->articleCode : $supplier->articleCode . ' <span style="color:red">new</span>' !!}</td>
                                     {{--<td>{{ $supplier->articleCode }}</td>--}}
                                     <td>{{ $supplier->sku }}</td>
                                     <td>{{ $supplier->ean }}</td>

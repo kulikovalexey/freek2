@@ -29,7 +29,7 @@
                 <div class="panel-body">
                     <a href='/import/supplier1'>check Supplier Real Solutions Haarlem</a><br>
                     <a href='/import/supplier2'>check Supplier Api BV</a><br>
-                    <a href='/import/supplier3'>check Supplier Valadis</a><br>
+                    <a href='/import/supplier3'>check Supplier Valadis</a>(need an access for ip)<br>
                     <a href='/import/supplier4'>check Supplier Wimood</a><br>
                     <a href='/store/products'>check Stock</a><br>{{-- :TODO rename route--}}
                 </div>

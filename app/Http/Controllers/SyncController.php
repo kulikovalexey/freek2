@@ -8,26 +8,20 @@ use App\StoreProduct;
 use App\Variant;
 use Illuminate\Http\Request;
 use App\SupplierProduct;
-
 use ShopApi;
-use Illuminate\Support\Facades\Session;
 
 class SyncController extends Controller
 {
     public function sync(Request $request)
     {
-//        $this->clearTrash(72868535);
-//        $this->clearTrash(72857900);
-//        exit;
-//
         $articleCode = $request->articleCode;
         $supplierId = $request->supplierId;
 
-        $variantData = Variant::where('articleCode', '=', $articleCode)  //:TODO rename/ проверяю наличие старых variant
+        $variantData = Variant::where('articleCode', '=', $articleCode)
             ->get()
             ->toArray();
 
-        $productData = SupplierProduct::where('supplier_id', '=', $supplierId)  // :TODO вытягиваю новые данные из файла поставщика
+        $productData = SupplierProduct::where('supplier_id', '=', $supplierId)
             ->where('articleCode', '=', $articleCode)
             ->get([
                 'id',
@@ -42,17 +36,14 @@ class SyncController extends Controller
 
         $brandId = Brand::where('name', '=', $productData[0]['brand'])->first();
 
-        if(isset($variantData[0]['product_id'])) {
-            //update
-            $resp = $this->updateProduct($productData[0], $variantData[0]['id'], $variantData[0]['product_id']);  //:TODO refactoring
-echo '<br>';
+        if(isset($variantData[0]['product_id'])) { //update
 
-//:TODO обработать ошибку
+            $resp = $this->updateProduct($productData[0], $variantData[0]['id'], $variantData[0]['product_id']);
 
             return \Redirect::back()->withErrors(['Product was updated']);
 
-        } else {
-            //create
+        } else { //create
+
             $resp = $this->createProduct($productData[0], $supplierId, $brandId->id);
             $this->saveNewProductData($resp, $brandId->id, $supplierId);
 
@@ -66,33 +57,8 @@ echo '<br>';
     }
 
 
-
     /**
-     * creating product
-     * @param $productData
-     * @param $supplierId
-     * @return array
-     */
-    public function createProduct($productData, $supplierId, $brandId)
-    {
-       $resp = ShopApi::products()->create([
-            "visibility"    => "hidden",
-            "title"         => $productData['name'],
-            "data01"        => $productData['brand'],
-//            "data02"        => "",
-//            "data03"        => "",
-            "fulltitle"     => $productData['brand'],
-            "description"   => "",
-            "content"       => "",
-            "supplier"      => $supplierId,
-            "brand"         => $brandId,
-        ]);
-
-        return $resp;
-    }
-
-    /**
-     * updating product
+     * updating product (api)
      * @param $productData
      * @return array
      */
@@ -104,22 +70,65 @@ echo '<br>';
 //            "sku"           => $productData['sku'],
             "priceIncl"     => $productData['priceIncl'],
             "stockLevel"    => $productData['stockLevel'],
-            "product"       => $productId,   //:TODO тут product_id в базе все данные есть. зачем тогда?
+            "product"       => $productId,
         ];
 
         if ($this->isFixedPrice($productId)){
             unset($data['priceIncl']);
-        } else {
-            echo 'принимаем новое значение';
         }
 
-        $resp = ShopApi::variants()->update($variantId, $data); //:TODO переделать на универсальное
+        $resp = ShopApi::variants()->update($variantId, $data); //:TODO дублировние.переделать на универсальное
 
         return $resp;
     }
 
+
     /**
-     * create new variant
+     * creating product (api)
+     * @param $productData
+     * @param $supplierId
+     * @return array
+     */
+    public function createProduct($productData, $supplierId, $brandId)
+    {
+       $resp = ShopApi::products()->create([
+            "visibility"    => "hidden",
+            "title"         => $productData['name'],
+            "data01"        => $productData['brand'],
+            "fulltitle"     => $productData['brand'],
+            "description"   => "",
+            "content"       => "",
+            "supplier"      => $supplierId,
+            "brand"         => $brandId,
+        ]);
+
+        return $resp;
+    }
+
+    /** save new product (db)
+     * @param $resp
+     * @param $brandId
+     * @param $supplierId
+     * @return bool
+     */
+    protected function saveNewProductData($resp, $brandId, $supplierId)
+    {
+        $data = [
+            'id'         =>  $resp['id'],
+            'name'       =>  $resp['title'],
+            'data01'     =>  $resp['data01'],
+            'data02'     =>  $resp['data02'],
+            'data03'     =>  $resp['data03'],
+            'brand_id'   =>  $brandId,
+            'supplier_id'=>  $supplierId,
+//            'priceExcl'  =>  $resp['priceExcl'], :TODO перепроверить
+        ];
+
+        return StoreProduct::insert($data);
+    }
+
+    /**
+     * create new variant (api)
      * @param $productId
      * @return mixed
      */
@@ -130,11 +139,32 @@ echo '<br>';
             'fields' => "id"
         ]);
 
-       return $newVariant[0]['id'];
+        return $newVariant[0]['id'];
     }
 
     /**
-     * update variant
+     * save new variant (db)
+     * @param $resp
+     * @return bool
+     */
+    protected function saveNewVariantData($resp)
+    {
+        $data = [
+            'id'         =>  $resp['id'],
+            'articleCode'       =>  $resp['articleCode'],
+            'ean'     =>  $resp['ean'],
+            'sku'     =>  $resp['sku'],
+            'priceIncl'     =>  $resp['priceIncl'],
+            'stockLevel'    =>  $resp['stockLevel'],
+            'product_id'    =>  $resp['product_id'],
+        ];
+
+        return Variant::insert($data);
+    }
+
+
+    /**
+     * update variant (api)
      * @param $data
      * @param $variantId
      * @return array
@@ -147,7 +177,7 @@ echo '<br>';
             "sku"           => $data->sku,
             "priceIncl"     => $data->priceIncl,
             "stockLevel"    => $data->stockLevel,
-            "product"       => [],   //:TODO тут product_id в базе все данные есть. зачем тогда?
+            "product"       => [],
         ]);
 
         return $resp;
@@ -155,7 +185,7 @@ echo '<br>';
 
 
     /**
-     * delete product
+     * delete product (api)
      * @param $id
      * @return array
      */
@@ -179,40 +209,10 @@ echo '<br>';
     }
 
 
-
-    protected function saveNewProductData($resp, $brandId, $supplierId)
-    {
-        $data = [
-            'id'         =>  $resp['id'],
-            'name'       =>  $resp['title'],
-            'data01'     =>  $resp['data01'],
-            'data02'     =>  $resp['data02'],
-            'data03'     =>  $resp['data03'],
-            'brand_id'   =>  $brandId,
-            'supplier_id'=>  $supplierId,
-//            'priceExcl'  =>  $resp['priceExcl'], :TODO перепроверить
-        ];
-
-        return StoreProduct::insert($data);
-    }
-
-
-    protected function saveNewVariantData($resp)
-    {
-        $data = [
-            'id'         =>  $resp['id'],
-            'articleCode'       =>  $resp['articleCode'],
-            'ean'     =>  $resp['ean'],
-            'sku'     =>  $resp['sku'],
-            'priceIncl'     =>  $resp['priceIncl'],
-            'stockLevel'    =>  $resp['stockLevel'],
-            'product_id'    =>  $resp['product_id'],
-        ];
-
-        return Variant::insert($data);
-    }
-
-
+    /**
+     * delete product (api)
+     * @param $id
+     */
     protected function clearTrash($id)
     {
         // удалить продукт
@@ -221,6 +221,11 @@ echo '<br>';
     }
 
 
+    /**
+     * check is fixed price
+     * @param $productId
+     * @return bool
+     */
     protected function isFixedPrice($productId)
     {
         $isFixedPrice = StoreProduct::find($productId);
