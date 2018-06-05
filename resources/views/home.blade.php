@@ -27,11 +27,11 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Update data</div>
                 <div class="panel-body">
-                    <a href='/import/supplier1'>check Supplier Real Solutions Haarlem</a> disabled<br>
-                    <a href='/import/supplier2'>check Supplier Api BV</a> disabled<br>
-                    <a href='/import/supplier3'>check Supplier Valadis</a> disabled<br>
-                    <a href='/import/supplier4'>check Supplier Wimood</a> disabled<br>
-                    <a href='/store/products'>check Stock</a> disabled<br>{{-- :TODO rename route--}}
+                    <a href='/import/supplier1'>check Supplier Real Solutions Haarlem</a><br>
+                    <a href='/import/supplier2'>check Supplier Api BV</a><br>
+                    <a href='/import/supplier3'>check Supplier Valadis</a><br>
+                    <a href='/import/supplier4'>check Supplier Wimood</a><br>
+                    <a href='/store/products'>check Stock</a><br>{{-- :TODO rename route--}}
                 </div>
             </div>
             <div class="panel panel-default">
