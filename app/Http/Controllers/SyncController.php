@@ -44,23 +44,45 @@ class SyncController extends Controller
 
         $brandId = Brand::where('name', '=', $productData[0]['brand'])->first();
 
-        if(isset($variantData[0]['product_id'])) { //update
+        if(isset($variantData[0]['product_id'])) {
 
-            $resp = $this->syncRepository->updateProduct($productData[0], $variantData[0]['id'], $variantData[0]['product_id']);
+            $resp = $this->updateProduct($productData[0], $variantData[0]['id'], $variantData[0]['product_id']);
 
             return \Redirect::back()->withErrors(['Product was updated']);
 
-        } else { //create
+        } else {
 
-            $resp = $this->syncRepository->createProduct($productData[0], $supplierId, $brandId->id);
-            $this->syncRepository->saveNewProductData($resp, $brandId->id, $supplierId);
-
-            $variantId = $this->syncRepository->getIdForNewVariant($resp['id']);
-
-            $resp = $this->syncRepository->updateVariant($productData[0], $variantId);
+            $resp = $this->createProduct($productData[0], $supplierId, $brandId->id);
 
             return \Redirect::back()->withErrors(['Product was created']);
         }
 
+    }
+
+    /**
+     * @param $productData
+     * @param $supplierId
+     * @param $brandId
+     * @return array
+     */
+    protected function createProduct($productData, $supplierId, $brandId)
+    {
+        $resp = $this->syncRepository->createProduct($productData, $supplierId, $brandId);
+        $this->syncRepository->saveNewProductData($resp, $brandId, $supplierId);
+
+        $variantId = $this->syncRepository->getIdForNewVariant($resp['id']);
+
+        return $this->syncRepository->updateVariant($productData, $variantId);
+    }
+
+    /**
+     * @param $productData
+     * @param $variantId
+     * @param $productId
+     * @return array
+     */
+    protected function updateProduct($productData, $variantId, $productId)
+    {
+        return $this->syncRepository->updateProduct($productData, $variantId, $productId);
     }
 }
