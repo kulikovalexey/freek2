@@ -2,12 +2,9 @@
 
 namespace App\Repository;
 
-use App\Brand;
 use App\Classes\StoreData\Products;
 use App\StoreProduct;
 use App\Variant;
-use Illuminate\Http\Request;
-use App\SupplierProduct;
 use ShopApi;
 
 class SyncRepository
@@ -32,7 +29,7 @@ class SyncRepository
             unset($data['priceIncl']);
         }
 
-        $resp = ShopApi::variants()->update($variantId, $data); //:TODO дублировние.переделать на универсальное
+        $resp = ShopApi::variants()->update($variantId, $data); //:TODO refactoring
 
         return $resp;
     }
@@ -76,7 +73,7 @@ class SyncRepository
             'data03'     =>  $resp['data03'],
             'brand_id'   =>  $brandId,
             'supplier_id'=>  $supplierId,
-//            'priceExcl'  =>  $resp['priceExcl'], :TODO перепроверить
+//            'priceExcl'  =>  $resp['priceExcl'], :TODO to check
         ];
 
         return StoreProduct::insert($data);
@@ -169,7 +166,6 @@ class SyncRepository
      */
     protected function clearTrash($id)
     {
-        // удалить продукт
         $resp = ShopApi::products()->delete($id);
         print_r($resp);
     }

@@ -3,14 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Classes\SupplierData\SupplierData;
-use App\StoreProduct;
 use App\SupplierProduct;
-use App\Repository\BrandRepository;
 use Illuminate\Http\Request;
 
 class SupplierController extends Controller
 {
-
+    /**
+     * @param Request $request
+     * @param $supplier
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index(Request $request, $supplier)
     {
         $supplierData = new SupplierData(
@@ -26,6 +28,12 @@ class SupplierController extends Controller
         ]);
     }
 
+    /**
+     * show supplier
+     * @param Request $request
+     * @param $supplier
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function showSupplier(Request $request, $supplier)
     {
         $supplierData = new SupplierData(
@@ -37,11 +45,13 @@ class SupplierController extends Controller
         ]);
     }
 
+    /**
+     * get config suppliers
+     * @param $supplier
+     * @return \Illuminate\Config\Repository|mixed
+     */
     protected function getConfigSuppliers($supplier)
     {
         return config("suppliers.{$supplier}");
     }
-
-
-
 }

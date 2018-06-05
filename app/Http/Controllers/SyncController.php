@@ -4,12 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Repository\SyncRepository;
 use App\Brand;
-use App\Classes\StoreData\Products;
-use App\StoreProduct;
 use App\Variant;
 use Illuminate\Http\Request;
 use App\SupplierProduct;
-use ShopApi;
 
 class SyncController extends Controller
 {

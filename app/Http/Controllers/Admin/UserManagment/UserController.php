@@ -104,10 +104,6 @@ class UserController extends Controller
      */
     public function update(Request $request, user $user)
     {
-//        $manager = new ImageManager(array('driver' => 'imagick'));
-//        $image = $manager->make('public/foo.jpg')->resize(300, 200);
-
-
         $validator = $request->validate([
             'name' => 'required|string|max:255',
             'email' => [

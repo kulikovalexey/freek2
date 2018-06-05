@@ -6,7 +6,10 @@ use App\SupplierProduct;
 
 class Supplier1Repository extends AbstractRepository
 {
-
+    /**
+     * @param $data
+     * @param $supplierData
+     */
     public function saveLoadingData($data, $supplierData)
     {
        $this->removeOldData($supplierData);
