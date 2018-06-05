@@ -225,10 +225,6 @@ class SyncController extends Controller
     {
         $isFixedPrice = StoreProduct::find($productId);
 
-        if (!empty($isFixedPrice)) {
-            return true;
-        } else {
-            return false;
-        }
+        return ($isFixedPrice->data02 == 'fixed_price');
     }
 }
