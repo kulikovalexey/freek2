@@ -23,7 +23,7 @@ class SyncController extends Controller
         $articleCode = $request->articleCode;
         $supplierId = $request->supplierId;
 
-        $dataForUpdate = Variant::where('articleCode', '=', $articleCode)  //:TODO rename/ проверяю наличие старых variant
+        $variantData = Variant::where('articleCode', '=', $articleCode)  //:TODO rename/ проверяю наличие старых variant
             ->get()
             ->toArray();
 
@@ -42,9 +42,12 @@ class SyncController extends Controller
 
         $brandId = Brand::where('name', '=', $productData[0]['brand'])->first();
 
-        if(isset($dataForUpdate[0]['product_id'])) {
+        if(isset($variantData[0]['product_id'])) {
             //update
-            $resp = $this->updateProduct($dataForUpdate[0]);
+            $resp = $this->updateProduct($productData[0], $variantData[0]['id'], $variantData[0]['product_id']);  //:TODO refactoring
+echo '<br>';
+
+//:TODO обработать ошибку
 
             return \Redirect::back()->withErrors(['Product was updated']);
 
@@ -93,21 +96,18 @@ class SyncController extends Controller
      * @param $productData
      * @return array
      */
-    public function updateProduct($productData)  //remove test data
+    public function updateProduct($productData, $variantId, $productId)  //remove test data
     {
-        // only variant
-        $variantId = $productData['id'];  //:TODO рефакторить
-
         $data = [
 //            "articleCode"   => $productData['articleCode'],
 //            "ean"           => $productData['ean'],
 //            "sku"           => $productData['sku'],
             "priceIncl"     => $productData['priceIncl'],
             "stockLevel"    => $productData['stockLevel'],
-            "product"       => $productData['product_id'],   //:TODO тут product_id в базе все данные есть. зачем тогда?
+            "product"       => $productId,   //:TODO тут product_id в базе все данные есть. зачем тогда?
         ];
 
-        if ($this->isFixedPrice($productData['product_id'])){
+        if ($this->isFixedPrice($productId)){
             unset($data['priceIncl']);
         } else {
             echo 'принимаем новое значение';

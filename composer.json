@@ -11,10 +11,11 @@
         "guzzlehttp/guzzle": "~6.0",
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
+        "monolog/monolog": "^1.23",
         "nesbot/carbon": "^1.27",
+        "orangehill/iseed": "dev-master",
         "parsecsv/php-parsecsv": "^1.0",
-        "unisharp/laravel-ckeditor": "^4.7",
-        "orangehill/iseed": "dev-master"
+        "unisharp/laravel-ckeditor": "^4.7"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.1",
