@@ -62,9 +62,10 @@ class ParserXML implements ParserInterface
     }
 
 
-    protected function setFilePath($fileName, $storagePath = '..' . DIRECTORY_SEPARATOR . 'tmp')  //:TODO refactoring
+    //:TODO rebase in helpers
+    protected function setFilePath($fileName, $storagePath = '..' . DIRECTORY_SEPARATOR . 'tmp')
     {
-        return $storagePath . DIRECTORY_SEPARATOR . $fileName;
+        return storage_path('sync/' . $fileName);
     }
 
 

@@ -13,7 +13,9 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        Commands\ImportStoreBrands::class,
+        Commands\ImportStoreProducts::class,
+        Commands\ImportSupplier::class,
     ];
 
     /**
@@ -24,8 +26,27 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        $schedule->command('sync:import-store-brands')
+            ->hourly()
+            ->between('6:00', '22:00');
+        $schedule->command('sync:import-store-products')
+            ->hourly()
+            ->between('6:00', '22:00');
+        $schedule->command('sync:import supplier1')
+            ->hourly()
+            ->between('6:00', '22:00');
+        $schedule->command('sync:import supplier2')
+            ->hourly()
+            ->between('6:00', '22:00');
+        $schedule->command('sync:import supplier3')
+            ->hourly()
+            ->between('6:00', '22:00');
+        $schedule->command('sync:import supplier4')
+            ->hourly()
+            ->between('6:00', '22:00');
+//        $schedule->command('sync:create-export-data')
+//            ->hourly()
+//            ->between('6:00', '22:00');
     }
 
     /**

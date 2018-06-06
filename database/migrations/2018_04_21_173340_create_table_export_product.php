@@ -4,11 +4,11 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableTestStoreProduct extends Migration  //copy CreateTableStoreProduct for front
+class CreateTableExportProduct extends Migration  //copy CreateTableStoreProduct for front
 {
     public function up()
     {
-        Schema::create('store_products_test', function (Blueprint $table) {
+        Schema::create('export_products', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('createdAt');

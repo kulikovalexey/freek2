@@ -40,7 +40,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($suppliers as $supplier)
+                            @forelse($suppliers as $supplier)
                                 <tr>
                                     <td>
                                         <form action="{{ route('sync.product') }}" method="POST">
@@ -69,7 +69,13 @@
                                     <td>{{ $supplier->priceIncl }}</td>
                                     <td>{{ $supplier->priceIncl_origin }}</td>
                                 </tr>
-                            @endforeach
+                            @empty
+                                <tr>
+                                    <td>
+                                        <p>empty</p>
+                                    </td>
+                                </tr>
+                            @endforelse
                             </tbody>
                         </table>
                         {{ $suppliers->links() }}
