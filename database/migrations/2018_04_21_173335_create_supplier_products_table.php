@@ -41,6 +41,11 @@ class CreateSupplierProductsTable extends Migration
             $table->integer('stockLevel')->nullable();
             $table->integer('supplier_id');
             $table->integer('yourPriceExVatEur')->nullable();
+
+            $table->index('articleCode');
+            $table->index('priceIncl');
+            $table->index('stockLevel');
+            $table->index('supplier_id');
         });
     }
 

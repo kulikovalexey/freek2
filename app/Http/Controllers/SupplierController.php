@@ -54,4 +54,19 @@ class SupplierController extends Controller
     {
         return config("suppliers.{$supplier}");
     }
+
+//    public function showProductForDelete()
+//    {
+//        $supplier = 'supplier1';
+//
+//        $supplierData = new SupplierData(
+//            $this->getConfigSuppliers($supplier)
+//        );
+//
+//        $suppliers = SupplierProduct::where('supplier_id', $supplierData->id)
+//            ->with('variant')
+//            ->all();
+//
+//
+//    }
 }

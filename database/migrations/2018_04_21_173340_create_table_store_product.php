@@ -19,6 +19,10 @@ class CreateTableStoreProduct extends Migration
             $table->integer('supplier_id')->nullable();
             $table->string('priceExcl')->nullable();  //:TODO remove
 
+            $table->index('supplier_id');
+            $table->index('data02');
+            $table->index('priceExcl');
+
         });
     }
 

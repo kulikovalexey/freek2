@@ -48,8 +48,8 @@ class ImportSupplier extends Command
             $this->getConfigSuppliers($supplier)
         );
 
-        $this->info('start download file: ' . $supplier);
-        (new Loader())->downloadFile($supplierData);
+//        $this->info('start download file: ' . $supplier);
+//        (new Loader())->downloadFile($supplierData);
 
         $this->info('Start parsing');
         $data = (new Parser())->parse($supplierData);

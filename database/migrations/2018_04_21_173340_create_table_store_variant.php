@@ -17,6 +17,10 @@ class CreateTableStoreVariant extends Migration
             $table->integer('stockLevel')->nullable();
             $table->integer('product_id')->nullable();
 
+            $table->index('articleCode');
+            $table->index('product_id');
+            $table->index('priceIncl');
+            $table->index('stockLevel');
         });
     }
 
