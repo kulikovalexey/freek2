@@ -27,22 +27,22 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('sync:import-store-brands')
-            ->hourly()
+            ->cron('00 6,12,18 * * *')
             ->between('6:00', '22:00');
         $schedule->command('sync:import-store-products')
-            ->hourly()
+            ->cron('02 6,12,18 * * *')
             ->between('6:00', '22:00');
         $schedule->command('sync:import supplier1')
-            ->hourly()
+            ->cron('05 6,12,18 * * *')
             ->between('6:00', '22:00');
         $schedule->command('sync:import supplier2')
-            ->hourly()
+            ->cron('10 6,12,18 * * *')
             ->between('6:00', '22:00');
         $schedule->command('sync:import supplier3')
-            ->hourly()
+            ->cron('15 6,12,18 * * *')
             ->between('6:00', '22:00');
         $schedule->command('sync:import supplier4')
-            ->hourly()
+            ->cron('20 6,12,18 * * *')
             ->between('6:00', '22:00');
 //        $schedule->command('sync:create-export-data')
 //            ->hourly()
