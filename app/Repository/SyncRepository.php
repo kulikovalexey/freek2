@@ -9,6 +9,11 @@ use ShopApi;
 
 class SyncRepository
 {
+    public function getDataForUpdate()
+    {
+
+    }
+
     /**
      * updating product (api)
      * @param $productData

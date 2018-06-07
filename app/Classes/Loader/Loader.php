@@ -39,7 +39,11 @@ class Loader
 
     protected function sendRequest($url, $filePath)
     {
-        $client = new \GuzzleHttp\Client();
+        $client = new \GuzzleHttp\Client([
+            'curl' => [
+                CURLOPT_CAINFO => base_path('resources/assets/cacert.pem')
+            ]
+        ]);
         $client->request(
             'GET',
             $url,
