@@ -25,13 +25,13 @@
             </div>
 
             <div class="panel panel-default">
-                <div class="panel-heading">Update data</div>
+                <div class="panel-heading">Update data (updated automatically)</div>
                 <div class="panel-body">
+                    <a href='/store/products'>check Stock</a><br>{{-- :TODO rename route--}}
                     <a href='/import/supplier1'>check Supplier Real Solutions Haarlem</a><br>
                     <a href='/import/supplier2'>check Supplier Api BV</a><br>
-                    <a href='/import/supplier3'>check Supplier Valadis</a>(need an access for ip)<br>
+                    <a href='/import/supplier3'>check Supplier Valadis</a><br>
                     <a href='/import/supplier4'>check Supplier Wimood</a><br>
-                    <a href='/store/products'>check Stock</a><br>{{-- :TODO rename route--}}
                 </div>
             </div>
             <div class="panel panel-default">
