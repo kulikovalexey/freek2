@@ -62,7 +62,7 @@ return [
         '_name' => 'supplier3',
         'id'      => 9264,
         'name'    => 'Valadis',
-        'url'     => 'https://etail.valadis.nl:444/prijslijst.csv',
+        'url'     => 'https://104958:B2bmtXYAnkqU@etail.valadis.nl:444/prijslijst.csv',
         'fileName' => 'supplier3.csv',
         'fileType' => 'csv',
         'delimiter'=> ';',
