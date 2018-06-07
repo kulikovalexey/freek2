@@ -39,7 +39,9 @@ class Loader
 
     protected function sendRequest($url, $filePath)
     {
-        $client = new \GuzzleHttp\Client();
+        $client = new \GuzzleHttp\Client([
+            'verify' => false
+        ]);
         $client->request(
             'GET',
             $url,
