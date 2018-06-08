@@ -41,7 +41,6 @@ class ImportSupplier extends Command
      */
     public function handle()
     {
-
         $supplier = $this->argument('supplier');
         $this->info(' import supplier: ' . $supplier);
         $supplierData = new SupplierData(

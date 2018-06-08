@@ -19,6 +19,19 @@ class SyncRepository
         \Log::info('product ' . $productId . ' mark for deletion');  //:TODO include $resp
     }
 
+    public static function removeMarkDelete($productId)
+    {
+        $resp = ShopApi::products()->update($productId, [
+            "visibility"    => 'hidden',
+            "data03"        => '',
+        ]);
+
+        \Log::info('product ' . $productId . 'remove data03=\'deleted\' products and visibility = \'\';');  //:TODO include $resp
+    }
+
+
+
+
 
     public function getDataForUpdate()
     {
@@ -33,6 +46,8 @@ class SyncRepository
      */
     public function updateProduct($productData, $variantId, $productId)  //remove test data
     {
+        $product = StoreProduct::find($productId);
+
         $data = [
 //            "articleCode"   => $productData['articleCode'],
             "ean"           => $productData['ean'],
@@ -42,7 +57,12 @@ class SyncRepository
             "product"       => $productId,
         ];
 
-        if ($this->isFixedPrice($productId)){
+//        if ($this->isHidden($product) && $this->isDeleted($product)){ //:TODO разобраться
+//            $this->updateHiddenProduct($productId);
+//        }
+
+
+        if ($this->isFixedPrice($product)){
             unset($data['priceIncl']);
         }
 
@@ -50,6 +70,19 @@ class SyncRepository
 
         return $resp;
     }
+
+    /**
+     * for product hidden products (api)
+     * @param $productId
+     */
+    public function updateHiddenProduct($productId)
+    {
+        $resp = ShopApi::products()->update($productId, [
+            "visibility"    => 'hidden',
+            "data03"        => '',
+        ]);
+    }
+
 
 
     /**
@@ -132,19 +165,19 @@ class SyncRepository
     }
 
 
-    /**
-     * delete product (api)
-     * @param $id
-     * @return array
-     */
-    public function deleteProduct($id)
-    {
-        $product = Products::findOrwhere($id);
-
-        $resp = ShopApi::products()->delete($product->id);
-
-        return $resp;
-    }
+//    /** :TODO for future
+//     * delete product (api)
+//     * @param $id
+//     * @return array
+//     */
+//    public function deleteProduct($id)
+//    {
+//        $product = Products::findOrwhere($id);
+//
+//        $resp = ShopApi::products()->delete($product->id);
+//
+//        return $resp;
+//    }
 
     /**
      * save new variant (db)
@@ -193,11 +226,25 @@ class SyncRepository
      * @param $productId
      * @return bool
      */
-    protected function isFixedPrice($productId)
+    protected function isFixedPrice($product)
     {
-        $isFixedPrice = StoreProduct::find($productId);
-
-        return ($isFixedPrice->data02 == 'fixed_price');
+        return ($product->data02 == 'fixed_price');
     }
 
+
+    /**
+     * check is fixed price
+     *
+     * @param $product
+     * @return bool
+     */
+    protected function isHidden($product)
+    {
+        return ($product->visibily == 'hidden');
+    }
+
+    protected function isDeleted($product)
+    {
+        return ($product->data03 == 'deleted');
+    }
 }

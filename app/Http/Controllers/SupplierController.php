@@ -21,7 +21,8 @@ class SupplierController extends Controller
 
         $suppliers = SupplierProduct::where('supplier_id', $supplierData->id)
             ->with('variant')
-            ->paginate(20);
+            ->orderBy('articleCode')
+            ->paginate(100);
 
          return view('supplier.index', [
             'suppliers' => $suppliers,

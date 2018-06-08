@@ -24,6 +24,17 @@ class CreateProcedureDeleteProducts extends Migration
                 ORDER BY `SP`.`id`  DESC;
               END;
         ');
+
+        DB::unprepared('DROP PROCEDURE IF EXISTS `sp_select_products_for_remove_data03_delete`');
+        DB::unprepared('
+              CREATE PROCEDURE sp_select_products_for_remove_data03_delete()
+              BEGIN
+                    SELECT SP.id FROM `store_products` SP JOIN variants V ON SP.id = V.product_id
+                      JOIN `supplier_products` SUP ON SUP.articleCode = V.articleCode
+                    where SP.supplier_id IN (SELECT DISTINCT supplier_id from supplier_products) AND SP.data03 = \'deleted\';
+              END;
+        ');
+
     }
 
     /**
@@ -34,5 +45,6 @@ class CreateProcedureDeleteProducts extends Migration
     public function down()
     {
         DB::unprepared('DROP PROCEDURE IF EXISTS `sp_select_products_for_delete`;');
+        DB::unprepared('DROP PROCEDURE IF EXISTS `sp_select_products_for_remove_data03_delete`;');
     }
 }
