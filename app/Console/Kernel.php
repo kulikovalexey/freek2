@@ -48,10 +48,10 @@ class Kernel extends ConsoleKernel
             ->cron('20 6,12,18 * * *')
             ->between('6:00', '22:00');
 
-        // delete (mark product)
-        $schedule->command('sync:delete-product')
-            ->cron('22 6,12,18 * * *')
-            ->between('6:00', '22:00');
+//        // delete (mark product)
+//        $schedule->command('sync:delete-product')
+//            ->cron('22 6,12,18 * * *')
+//            ->between('6:00', '22:00');
 
         // update products in store
 //        $schedule->command('sync:update-product supplier1')
