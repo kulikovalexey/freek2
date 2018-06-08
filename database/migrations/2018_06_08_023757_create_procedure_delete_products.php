@@ -20,7 +20,7 @@ class CreateProcedureDeleteProducts extends Migration
                 SELECT SP.id FROM `store_products` SP JOIN variants V ON SP.id = V.product_id
                   LEFT JOIN `supplier_products` SUP ON SUP.articleCode = V.articleCode
             
-                where SUP.articleCode IS NULL AND SP.supplier_id IN (SELECT DISTINCT supplier_id from supplier_products)
+                where SUP.articleCode IS NULL AND SP.supplier_id IN (SELECT DISTINCT supplier_id from supplier_products)  AND  SP.data03 !="deleted"
                 ORDER BY `SP`.`id`  DESC;
               END;
         ');

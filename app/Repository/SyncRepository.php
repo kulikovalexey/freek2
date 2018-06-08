@@ -9,11 +9,14 @@ use ShopApi;
 
 class SyncRepository
 {
-    public function markForDeletion()
+    public static function markForDeletion($productId)
     {
-        //получить из процедуры id
-        // выставить значние hidden, data03 = deleted
+        $resp = ShopApi::products()->update($productId, [
+            "visibility"    => 'hidden',
+            "data03"        => 'deleted',
+        ]);
 
+        \Log::info('product ' . $productId . ' mark for deletion');  //:TODO include $resp
     }
 
 

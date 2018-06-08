@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use App\Repository\SyncRepository;
 
 class DeleteProduct extends Command
 {
@@ -40,6 +41,9 @@ class DeleteProduct extends Command
         //вызвать процедуру и получить id - отправить в метод
         $productsId = \DB::select('CALL `sp_select_products_for_delete`');
 
-        print_r($productsId);
+        foreach ($productsId as $item){
+            SyncRepository::markForDeletion($item->id);
+        }
+        $this->info(' deleted products was hidden;');
     }
 }

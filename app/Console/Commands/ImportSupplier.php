@@ -59,7 +59,7 @@ class ImportSupplier extends Command
         $supplierRepository->saveLoadingData($data, $supplierData);
     }
 
-    protected function getConfigSuppliers($supplier)
+    protected function getConfigSuppliers($supplier)  //:TODO rebase
     {
         return config("suppliers.{$supplier}");
     }
