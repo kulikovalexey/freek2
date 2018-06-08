@@ -9,9 +9,18 @@ use ShopApi;
 
 class SyncRepository
 {
+    public function markForDeletion()
+    {
+        //получить из процедуры id
+        // выставить значние hidden, data03 = deleted
+
+    }
+
+
     public function getDataForUpdate()
     {
-
+        // вызвать процедуру и пездячить в очередь
+        // вызывать методы как в контроллере. потом отрефакторить
     }
 
     /**
@@ -23,8 +32,8 @@ class SyncRepository
     {
         $data = [
 //            "articleCode"   => $productData['articleCode'],
-//            "ean"           => $productData['ean'],
-//            "sku"           => $productData['sku'],
+            "ean"           => $productData['ean'],
+            "sku"           => $productData['sku'],
             "priceIncl"     => $productData['priceIncl'],
             "stockLevel"    => $productData['stockLevel'],
             "product"       => $productId,

@@ -18,7 +18,7 @@ class DeleteProduct extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'mark product for delete (hidden)';
 
     /**
      * Create a new command instance.
@@ -37,6 +37,9 @@ class DeleteProduct extends Command
      */
     public function handle()
     {
-        //
+        //вызвать процедуру и получить id - отправить в метод
+        $productsId = \DB::select('CALL `sp_select_products_for_delete`');
+
+        print_r($productsId);
     }
 }

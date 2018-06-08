@@ -18,7 +18,7 @@ class UpdateProduct extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'update products in store';
 
     /**
      * Create a new command instance.
@@ -37,6 +37,14 @@ class UpdateProduct extends Command
      */
     public function handle()
     {
-        //
+        $productsData = \DB::select('CALL `sp_select_products_for_update`(441980)');
+
+        foreach ($productsData as $item){
+            print_r($item);
+
+
+            Log::info();
+        }
+
     }
 }
