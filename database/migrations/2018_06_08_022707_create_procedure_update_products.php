@@ -17,8 +17,13 @@ class CreateProcedureUpdateProducts extends Migration
         DB::unprepared('
                       CREATE PROCEDURE sp_select_products_for_update(IN supplier INT)
                       BEGIN
-                        SELECT V.product_id, SUP.articleCode, SP.supplier_id FROM `store_products` SP JOIN variants V ON SP.id = V.product_id JOIN `supplier_products` SUP ON SUP.articleCode = V.articleCode 
-                        WHERE (SP.supplier_id = supplier AND (V.priceIncl != SUP.priceIncl OR V.stockLevel != SUP.stockLevel)) OR (SP.supplier_id = supplier AND V.product_id IS NULL) ORDER BY `SP`.`supplier_id` DESC; 
+                        SELECT SUP.articleCode, SUP.supplier_id FROM `supplier_products` SUP
+ LEFT JOIN variants V ON SUP.articleCode = V.articleCode
+  LEFT JOIN store_products SP ON V.product_id = SP.id
+
+where SUP.supplier_id = supplier AND SP.supplier_id IS NULL
+      OR
+      SUP.supplier_id = supplier AND SUP.supplier_id= SP.supplier_id AND ( V.priceIncl != SUP.priceIncl OR V.stockLevel !=  SUP.stockLevel);
                  END;
         ');
     }

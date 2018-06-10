@@ -52,8 +52,8 @@ class UpdateProduct extends Command
         $supplierData = new SupplierData(
             $this->getConfigSuppliers($supplier)
         );
-
-        $productsData = \DB::select('CALL `sp_select_products_for_update`(' . $supplierData->id . ')');
+echo 'CALL sp_select_products_for_update(' . $supplierData->id . ');';
+        $productsData = \DB::select('CALL sp_select_products_for_update(' . $supplierData->id . ');');
 
         $cnt = count($productsData);
 
