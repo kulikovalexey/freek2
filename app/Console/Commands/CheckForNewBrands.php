@@ -40,8 +40,7 @@ class CheckForNewBrands extends Command
     {
         $supplier = $this->argument('supplier');
         $this->info('check new brands in current supplier' . $supplier);
-
-
+        //:TODO check and add new brand if not data
     }
 
     /**:TODO rebase
