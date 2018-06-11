@@ -18,7 +18,7 @@ class SyncController extends Controller
     }
 
 
-    public function sync(Request $request)  //:TODO refactoring
+    public function sync(Request $request)  //:TODO refactoring (in command same function)
     {
         $articleCode = $request->articleCode;
         $supplierId = $request->supplierId;

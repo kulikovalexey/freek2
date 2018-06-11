@@ -22,7 +22,7 @@ class ImportSupplier extends Command
      *
      * @var string
      */
-    protected $description = 'Import {supplier} data';
+    protected $description = 'sync:import {supplier}';
 
     /**
      * Create a new command instance.

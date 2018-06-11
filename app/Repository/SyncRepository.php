@@ -30,15 +30,6 @@ class SyncRepository
     }
 
 
-
-
-
-    public function getDataForUpdate()
-    {
-        // вызвать процедуру и пездячить в очередь
-        // вызывать методы как в контроллере. потом отрефакторить
-    }
-
     /**
      * updating product (api)
      * @param $productData
@@ -49,18 +40,12 @@ class SyncRepository
         $product = StoreProduct::find($productId);
 
         $data = [
-//            "articleCode"   => $productData['articleCode'],
             "ean"           => $productData['ean'],
             "sku"           => $productData['sku'],
             "priceIncl"     => $productData['priceIncl'],
             "stockLevel"    => $productData['stockLevel'],
             "product"       => $productId,
         ];
-
-//        if ($this->isHidden($product) && $this->isDeleted($product)){ //:TODO разобраться
-//            $this->updateHiddenProduct($productId);
-//        }
-
 
         if ($this->isFixedPrice($product)){
             unset($data['priceIncl']);
@@ -82,8 +67,6 @@ class SyncRepository
             "data03"        => '',
         ]);
     }
-
-
 
     /**
      * creating product (api)
@@ -123,7 +106,7 @@ class SyncRepository
             'data03'     =>  $resp['data03'],
             'brand_id'   =>  $brandId,
             'supplier_id'=>  $supplierId,
-//            'priceExcl'  =>  $resp['priceExcl'], :TODO to check
+//            'priceExcl'  =>  $resp['priceExcl'], :TODO for supplier1
         ];
 
         return StoreProduct::insert($data);

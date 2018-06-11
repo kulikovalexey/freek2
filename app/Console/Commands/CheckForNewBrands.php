@@ -1,25 +1,25 @@
-<?php  //:TODO for debugging
+<?php
 
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Repository\SyncRepository;
 
-class Info extends Command
+class CheckForNewBrands extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'sync:info';
+    protected $signature = 'sync:check-new-brands {supplier}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'mark product for delete (hidden)';
+    protected $description = 'sync:check-new-brands {supplier}';
 
     /**
      * Create a new command instance.
@@ -38,11 +38,18 @@ class Info extends Command
      */
     public function handle()
     {
-        //variant
-//        $resp = \ShopApi::variants()->get(136317644);
+        $supplier = $this->argument('supplier');
+        $this->info('check new brands in current supplier' . $supplier);
 
-        $resp = \ShopApi::products()->get(69019187);
 
-        $this->info(print_r($resp));
+    }
+
+    /**:TODO rebase
+     * @param $supplier
+     * @return \Illuminate\Config\Repository|mixed
+     */
+    protected function getConfigSuppliers($supplier)
+    {
+        return config("suppliers.{$supplier}");
     }
 }

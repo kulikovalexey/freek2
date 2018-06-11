@@ -75,16 +75,11 @@ echo 'CALL sp_select_products_for_update(' . $supplierData->id . ');';
 
     }
 
-
-    protected function getConfigSuppliers($supplier) //:TODO rebase
-    {
-        return config("suppliers.{$supplier}");
-    }
-
-
-    //from synccontroller/ :TODO refactoring
-
-    public function sync($articleCode, $supplierId)  //:TODO refactoring
+    /** synchronization data
+     * @param $articleCode
+     * @param $supplierId
+     */
+    public function sync($articleCode, $supplierId)
     {
 
             $variantData = Variant::where('articleCode', '=', $articleCode)
@@ -118,9 +113,6 @@ echo 'CALL sp_select_products_for_update(' . $supplierData->id . ');';
 
                 if(isset($resp['id'])) \Log::info('supplierId: ' . $supplierId . '- articleCode: ' . $articleCode . ',  Product was created');
             }
-
-
-
     }
 
     /**
@@ -149,4 +141,15 @@ echo 'CALL sp_select_products_for_update(' . $supplierData->id . ');';
     {
         return $this->syncRepository->updateProduct($productData, $variantId, $productId);
     }
+
+    /**
+     * :TODO rebase
+     * @param $supplier
+     * @return \Illuminate\Config\Repository|mixed
+     */
+    protected function getConfigSuppliers($supplier)
+    {
+        return config("suppliers.{$supplier}");
+    }
+
 }
