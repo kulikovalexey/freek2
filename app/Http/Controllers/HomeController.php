@@ -47,13 +47,4 @@ class HomeController extends Controller
         ]);
     }
 
-    public function compareProducts()   //:TODO тут связать
-    {
-        $products = StoreProduct::paginate();
-
-        return view('products.compare', [
-            'products' => $products,
-        ]);
-    }
-
 }

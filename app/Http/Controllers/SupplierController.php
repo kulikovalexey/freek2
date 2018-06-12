@@ -9,6 +9,16 @@ use Illuminate\Http\Request;
 class SupplierController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
      * @param Request $request
      * @param $supplier
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
