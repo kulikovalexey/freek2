@@ -31,22 +31,6 @@ class UsersTableSeeder extends Seeder
                 'password' => bcrypt('secret'),
                 'avatar' => $faker->image(),
             ],
-            [
-                'id' => 2,
-                'name' => 'user',
-                'slug' => 'user-user',
-                'email' => 'user@user.com',
-                'password' => bcrypt('secret'),
-                'avatar' => $faker->image(),
-            ],
-            [
-                'id' => 3,
-                'name' => 'blogger',
-                'slug' => 'user-blogger',
-                'email' => 'blogger@blogger.com',
-                'password' => bcrypt('secret'),
-                'avatar' => $faker->image(),
-            ],
         ];
 
 

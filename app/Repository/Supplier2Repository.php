@@ -32,14 +32,6 @@ class Supplier2Repository extends AbstractRepository
     }
 
     /**
-     * @return string
-     */
-    public function truncateTable()
-    {
-        return Supplier2Product::truncate();
-    }
-
-    /**
      * after review
      * @param $price
      * @return float
